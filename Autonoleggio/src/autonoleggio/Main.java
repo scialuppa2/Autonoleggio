@@ -3,8 +3,12 @@ package autonoleggio;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		MenuPrincipale menuPrincipale = new MenuPrincipale();
+		menuPrincipale.menuAccessoUtente();
 
 	}
+
+
 
 }
