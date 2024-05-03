@@ -1,9 +1,9 @@
-package autonoleggio;
+package it.terzaFila.autonoleggio;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import entity.Auto;
+import it.terzaFila.autonoleggio.entity.Auto;
 
 public class Main {
 	

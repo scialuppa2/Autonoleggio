@@ -1,0 +1,38 @@
+
+
+/siete una software house e venite incaricati di sviluppare un autonoleggio. questo autonoleggio presenta due attori: il manager che può inserire auto 
+//e rimuoverle (e anche effettuare ricerche)
+//e il cliente: il cliente può noleggiare un'auto 
+//(quindi ci sarà uno stato noleggiata a true o false), 
+//effettuare una ricerca per prezzo o per nome auto. 
+//una volta che un'auto è noleggiata fino a quando non si restituisce
+//non può essere noleggiata da qualcun altro.
+// il twist: in realtà questo autonoleggio 
+//è una base segreta di batman e inserendo il suo nome 
+//e una password compare la batmobile che non è visibile a nessun altro. Batman può aggiungere o rimuovere nuove batmobili.
+[09:26]
+//ultimissima cosa cercate di gestire anche un login generale e un sistema di registrazione
+
+il sei come consegna voglio il link e il jar file dell'eseguibile
+
+La ricerca per prezzo deve restituire le auto con quel prezzo o inferirore
+
+
+package
+uso questo modello per il package
+
+codice paese it
+nome azienda / team terza fila
+nome progetto autonoleggio
+
+it.terzaFila.autonoleggio
+
+
+https://www.html.it/pag/15098/cosa-sono-i-package-di-java/
+
+password
+Console c=System.console();    
+System.out.println("Enter password: ");    
+char[] ch=c.readPassword();    
+String pass=String.valueOf(ch);//converting char array into string    
+System.out.println("Password is: "+pass);    

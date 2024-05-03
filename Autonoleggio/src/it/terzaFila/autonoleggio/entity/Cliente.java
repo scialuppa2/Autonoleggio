@@ -1,4 +1,6 @@
-package autonoleggio;
+package it.terzaFila.autonoleggio.entity;
+
+import it.terzaFila.autonoleggio.Utente;
 
 public class Cliente extends Utente{
 	
