@@ -7,8 +7,8 @@ public class Cliente extends Utente{
 	protected String nome;
 	protected String cognome;
 	
-	public Cliente(String nome, String cognome, String username, String password, String ruolo) {
-		super(username, password, ruolo);
+	public Cliente(String nome, String cognome, String email, String password, String ruolo) {
+		super(email, password, ruolo);
 		this.nome = nome;
 		this.cognome = cognome;
 	}

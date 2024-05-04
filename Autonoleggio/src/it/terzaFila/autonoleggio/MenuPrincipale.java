@@ -1,16 +1,22 @@
 package it.terzaFila.autonoleggio;
 
+<<<<<<< HEAD
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import it.terzaFila.autonoleggio.entity.Auto;
+import entity.Auto;
 
+=======
+import java.util.Scanner;
+
+>>>>>>> origin/master
 public class MenuPrincipale {
 
 	public void menuAccessoUtente() {
 
 		Scanner scanner = new Scanner(System.in);
 		
+<<<<<<< HEAD
 		boolean loggedIn = false; // ma serve?
 		boolean ripeti = true;
 
@@ -21,11 +27,24 @@ public class MenuPrincipale {
 			System.out.println("1. Accedi");
 			System.out.println("2. Registrati");
 			System.out.println("0. Esci");
+=======
+		boolean loggedIn = false;
+
+		while (true) {
+			System.out.println("Benvenuto nell'autonoleggio!");
+			System.out.println("Scegli un'opzione:");
+			System.out.println("1. Accedi");
+			System.out.println("2. Registrati");
+			System.out.println("3. Esci");
+>>>>>>> origin/master
 
 			int scelta = scanner.nextInt();
 
 			switch (scelta) {
+<<<<<<< HEAD
 			
+=======
+>>>>>>> origin/master
 			case 1:
 				if (!loggedIn) {
 					accedi();
@@ -34,6 +53,7 @@ public class MenuPrincipale {
 					System.out.println("Sei già loggato!");
 				}
 				break;
+<<<<<<< HEAD
 				
 			case 2:
 				registrati();
@@ -182,6 +202,20 @@ public class MenuPrincipale {
 
 	
 	
+=======
+			case 2:
+				registrati();
+				break;
+			case 3:
+				System.out.println("Arrivederci!");
+				System.exit(0);
+			default:
+				System.out.println("Scelta non valida. Riprova.");
+			}
+		}
+	}
+
+>>>>>>> origin/master
 	public static void accedi() {
 		// Qui implementa la logica per l'accesso
 		System.out.println("Hai effettuato l'accesso con successo!");
