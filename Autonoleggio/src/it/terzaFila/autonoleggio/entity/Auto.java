@@ -1,4 +1,4 @@
-package entity;
+package it.terzaFila.autonoleggio.entity;
 
 import java.time.LocalDate;
 
