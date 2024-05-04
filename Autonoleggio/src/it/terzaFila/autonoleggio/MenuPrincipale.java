@@ -1,4 +1,4 @@
-package autonoleggio;
+package it.terzaFila.autonoleggio;
 
 import java.util.Scanner;
 

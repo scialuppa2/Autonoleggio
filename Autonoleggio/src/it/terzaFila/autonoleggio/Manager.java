@@ -1,4 +1,4 @@
-package autonoleggio;
+package it.terzaFila.autonoleggio;
 
 public class Manager extends Utente {
 
