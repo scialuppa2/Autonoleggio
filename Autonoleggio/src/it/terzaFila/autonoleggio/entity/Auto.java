@@ -25,12 +25,12 @@ public class Auto {
 	
 	protected String modello;
 	protected float prezzo;
-	protected boolean batman;	
-	protected boolean prenotata;
-	protected LocalDate data;
-	protected LocalDate durata;
+	protected boolean batman = false;	
+	protected boolean prenotata = false;
+	protected LocalDate data = null;
+	protected LocalDate durata = null;
 	
-	public Auto(String modello, float prezzo, boolean batman) {
+	public Auto(String modello, float prezzo) {
 		
 		this.modello = modello;
 		this.prezzo = prezzo;
