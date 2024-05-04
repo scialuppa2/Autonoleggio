@@ -2,23 +2,23 @@ package autonoleggio;
 
 public class Utente {
 	//Attributi
-	protected String username;
+	protected String email;
 	protected String password;
 	protected String ruolo;
 	
 	//Costruttore
-	public Utente(String username, String password, String ruolo) {
-		this.username = username;
+	public Utente(String email, String password, String ruolo) {
+		this.email = email;
 		this.password = password;
 		this.ruolo = ruolo;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
