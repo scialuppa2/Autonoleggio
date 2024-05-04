@@ -1,3 +1,23 @@
+```mermaid
+graph TD
+A[Inizio] -- Link text --> B{ login/registration}
+
+B --login --> C{Login}
+C -- corretto --> F[menu clienti]
+C -- errato --> B
+B -- register --> D[register]
+D --> G[Inserimento Dati]
+G --> F
+C -- Manager --> H[menu Manager]
+
+H -- inserisci auto --> HA[modello,prezzo]
+H -- elimina auto --> HB[modello]
+H -- salva auto --> HC[salva su file]
+H -- carica auto --> HD[carica su file]
+
+F --> I[cerca per prezzo]
+F --> LL[cerca per modello]
+```
 
 ## Autonoleggio
 
