@@ -10,7 +10,7 @@ public class Utente {
 	public Utente(String email, String password, String ruolo) {
 		this.email = email;
 		this.password = password;
-		this.ruolo = ruolo;
+		this.ruolo = "user";
 	}
 
 	public String getEmail() {
