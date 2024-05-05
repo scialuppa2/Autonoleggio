@@ -23,20 +23,24 @@ public class Auto {
     private String marchio;
     private String modello;
     private float prezzo;
-    private boolean batman = false;
+    private boolean isBatmobile = false;
     private boolean prenotata = false;
     private LocalDate data = null;
     private LocalDate durata = null;
 
- // Costruttore
+ // Costruttore senza il parametro isBatmobile
     public Auto(int idAuto, String marchio, String modello, float prezzo) {
+        this(idAuto, marchio, modello, prezzo, false); // Chiama l'altro costruttore con isBatmobile impostato a false
+    }
+
+    // Costruttore con tutti i parametri, incluso isBatmobile
+    public Auto(int idAuto, String marchio, String modello, float prezzo, boolean isBatmobile) {
         this.idAuto = idAuto;
         this.marchio = marchio;
         this.modello = modello;
         this.prezzo = prezzo;
-		this.batman = batman;
-
-	}
+        this.isBatmobile = isBatmobile;
+    }
     
     
 	public int getIdAuto() {
@@ -71,12 +75,12 @@ public class Auto {
 		this.prezzo = prezzo;
 	}
 
-	public boolean isBatman() {
-		return batman;
+	public boolean isBatmobile() {
+		return isBatmobile;
 	}
 
-	public void setBatman(boolean batman) {
-		this.batman = batman;
+	public void setIsBatmobile(boolean isBatmobile) {
+		this.isBatmobile = isBatmobile;
 	}
 
 	public boolean isPrenotata() {

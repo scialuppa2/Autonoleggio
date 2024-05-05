@@ -48,7 +48,7 @@ public class RegistrazioneCliente {
      // Scrivi i dati completi del cliente su un file di testo separato
         try {
             PrintWriter clientiWriter = new PrintWriter(new FileWriter("utenti.txt", true));
-            clientiWriter.println(nome + "," + cognome + "," + email + "," + password);
+            clientiWriter.println(nome + "," + cognome + "," + email + "," + password + "," + "user");
             clientiWriter.println(); // Aggiungi una riga vuota per separare i dati
             clientiWriter.close();
             System.out.println("Registrazione completata! I tuoi dati sono stati salvati.");
