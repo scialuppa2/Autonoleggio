@@ -124,7 +124,8 @@ public class GestioneAuto {
 		
 		for( Auto auto : this.autoList) {
 			
-			if(  ( auto.getPrezzo() <= prezzo ) &&  (!auto.isBatman()) ){
+			
+			if(  ( auto.getPrezzo() <= prezzo ) && (!auto.isBatman()) && (!auto.isPrenotata()) ){
 				research.add(auto);
 			}
 			
@@ -141,7 +142,7 @@ public class GestioneAuto {
 			
 			for( Auto auto : this.autoList) {
 				
-				if( (auto.getMarchio().equals(model) ) || (auto.getModello().equals(model) ) &&  (!auto.isBatman()) ) {
+				if( (auto.getMarchio().equals(model) ) || (auto.getModello().equals(model) ) && (!auto.isBatman()) && (!auto.isPrenotata()) ) {
 					research.add(auto);
 				}
 				
