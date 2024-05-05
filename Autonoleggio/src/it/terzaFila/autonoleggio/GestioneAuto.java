@@ -117,4 +117,38 @@ public class GestioneAuto {
             System.out.println("Si è verificato un errore durante il salvataggio delle auto su file: " + e.getMessage());
         }
     }
+	
+	private List<Auto> findPrice(float prezzo){	
+		
+		List<Auto> research = new ArrayList<Auto>();
+		
+		for( Auto auto : this.autoList) {
+			
+			if(  ( auto.getPrezzo() <= prezzo ) &&  (!auto.isBatman()) ){
+				research.add(auto);
+			}
+			
+		}
+		
+		return research;
+		
+		
+	}
+	
+	private List<Auto> findModel(String model){	
+			
+			List<Auto> research = new ArrayList<Auto>();
+			
+			for( Auto auto : this.autoList) {
+				
+				if( (auto.getMarchio().equals(model) ) || (auto.getModello().equals(model) ) &&  (!auto.isBatman()) ) {
+					research.add(auto);
+				}
+				
+			}
+			
+			return research;
+			
+			
+		}
 }
