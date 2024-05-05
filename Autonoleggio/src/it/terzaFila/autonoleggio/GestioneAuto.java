@@ -244,15 +244,13 @@ public class GestioneAuto {
 			
 		
 		if( (autoStart.isBefore(pEnd) && autoEnd.isAfter(pEnd))  )
-			return false;
-		
-		
+			return false;	
 		
 		
 		return disp;	
-		
+		 
 	
 	
-}
+	}
 
 }
