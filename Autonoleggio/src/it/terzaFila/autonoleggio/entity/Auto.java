@@ -26,7 +26,7 @@ public class Auto {
     private boolean isBatmobile = false;
     private boolean prenotata = false;
     private LocalDate data = null;
-    private LocalDate durata = null;
+    private int durata = 0;
 
  // Costruttore senza il parametro isBatmobile
     public Auto(int idAuto, String marchio, String modello, float prezzo) {
@@ -99,11 +99,11 @@ public class Auto {
 		this.data = this.stringToDate(data);
 	}
 
-	public LocalDate getDurata() {
+	public int getDurata() {
 		return durata;
 	}
 
-	public void setDurata(LocalDate durata) {
+	public void setDurata(int durata) {
 		this.durata = durata;
 	}
 
@@ -127,7 +127,7 @@ public class Auto {
 
 	public String toString() {
 	    String prenotataStringa = (prenotata) ? "Non Disponibile" : "Disponibile";
-	    String durataStringa = (durata != null) ? String.valueOf(durata.getDayOfYear()) : "N/D";
+	    String durataStringa = (durata != 0) ? String.valueOf(durata) : "N/D";
 	    return this.idAuto + ", " + this.marchio + ", " + this.modello + ", " + this.prezzo + ", " + prenotataStringa + ", " + this.dateToString(this.data) + ", " + durataStringa;
 	}
 

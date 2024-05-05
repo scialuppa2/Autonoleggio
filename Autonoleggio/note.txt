@@ -35,4 +35,26 @@ Console c=System.console();
 System.out.println("Enter password: ");    
 char[] ch=c.readPassword();    
 String pass=String.valueOf(ch);//converting char array into string    
-System.out.println("Password is: "+pass);    
+System.out.println("Password is: "+pass); 
+
+-----------------------
+test isDisponibile(Auto auto, LocalDate prenotStart, int prenotEnd)
+LocalDate autoStart = LocalDate.of(2024, 5, 15);
+		int autoEnd = 4;
+		
+		LocalDate pStart = LocalDate.of(2024, 5, 13);		
+		int pEnd = 3;
+		
+		System.out.println("durata prenot " + pEnd);
+		
+		Auto a = new Auto(0, "", "", 0);		
+		a.setData( a.dateToString(autoStart) );
+		
+		a.setDurata( autoEnd );
+		System.out.println("durata" + a.getDurata());
+		
+		if (GestioneAuto.isDisponible(a, pStart, pEnd))
+			System.out.println("ok");
+		else
+			System.out.println("non disponibile");
+-----------------

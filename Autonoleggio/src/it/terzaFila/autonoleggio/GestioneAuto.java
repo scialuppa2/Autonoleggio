@@ -1,3 +1,4 @@
+
 package it.terzaFila.autonoleggio;
 
 import java.io.BufferedReader;
@@ -208,38 +209,46 @@ public class GestioneAuto {
 			}
 
 		}
-
 	
-	private boolean isDisponible(Auto current, LocalDate startReserv, LocalDate durata) {
+	public static boolean isDisponible(Auto current, LocalDate pStart, int durata) {
 		
-		LocalDate endReserv = current.getData().plusDays(durata.getDayOfYear());
+		System.out.println("current auto" + current.getData().toString());
+		
+		LocalDate pEnd = pStart.plusDays(durata);
+		System.out.println("pStart " + pStart.toString());
+		System.out.println("pEnd " + pEnd.toString());
 		
 		LocalDate autoStart = current.getData();
-		LocalDate autoEnd = autoStart.plusDays(current.getDurata().getDayOfYear());
-		
-		if( startReserv.isAfter( autoStart ) && ( endReserv.isBefore( autoEnd )) )
-			System.out.println("compreso");
-		
-		return false;	
-		
-		/*
-		LocalDate autoStart = LocalDate.of(2023, 5, 15);
-		LocalDate autoEnd = LocalDate.of(2023, 5, 16);
-		LocalDate pStart = LocalDate.of(2023, 5, 1);
-		LocalDate pEnd = LocalDate.of(2023, 5, 30);
-		
-		if( (autoStart.isAfter(pStart) && autoEnd.isBefore(pStart)) || (autoStart.isBefore(pEnd) && autoEnd.isAfter(pEnd))  )
-			System.out.println("compreso");
-		else
-			System.out.println("escluso");
 		
 		
-	}*/
+		LocalDate autoEnd = autoStart.plusDays(current.getDurata());
+		
+		System.out.println("autoEnd" + autoEnd.toString());
+		
+		boolean disp = true;
+		
+		
+		if( (autoEnd.isAfter(pStart) && autoStart.isBefore(pStart))   )
+			return false;
+		
+		
+		if( (pEnd.isAfter(autoStart) && pStart.isBefore(autoStart))   )
+			return false;
+		
+		
+		if( (pEnd.isBefore(autoEnd) && pStart.isAfter(autoEnd))   )
+			return false;
+			
+		
+		if( (autoStart.isBefore(pEnd) && autoEnd.isAfter(pEnd))  )
+			return false;	
+		
+		
+		return disp;	
+		 
 	
-=======
-
-		return research;
-
+	
 	}
+
 
 }
