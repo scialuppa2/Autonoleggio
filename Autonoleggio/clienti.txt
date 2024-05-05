@@ -1,5 +1,0 @@
-Nome: Fabrizio
-Cognome: D'alessandro
-Email: scialuppa2@gmail.com
-Password: 12345678
-

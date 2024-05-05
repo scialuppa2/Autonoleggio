@@ -1,0 +1,4 @@
+1,Marchio2,Modello2,15000.0,true
+2,Marchio3,Modello3,12000.0,false
+3,Marchio4,Modello4,14000.0,false
+4,Marchio5,Modello5,12000.0,false
