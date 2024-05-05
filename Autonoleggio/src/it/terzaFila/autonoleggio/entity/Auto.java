@@ -1,5 +1,6 @@
 package it.terzaFila.autonoleggio.entity;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 // 6/5 come consegna voglio il link e il jar file dell'eseguibile
@@ -30,6 +31,7 @@ public class Auto {
 
  // Costruttore
     public Auto(int idAuto, String marchio, String modello, float prezzo) {
+    	
         this.idAuto = idAuto;
         this.marchio = marchio;
         this.modello = modello;
@@ -104,15 +106,26 @@ public class Auto {
 	}
 
 	public String dateToString(LocalDate data) {
-		if (data != null) {
-			return data.getDayOfMonth() + "/" + data.getMonthValue() + "/" + data.getYear();
-		} else {
-			return "N/D"; // O qualsiasi altra stringa di default per rappresentare una data nulla
+		
+		String ld = "";
+		
+		try {		
+			
+			 ld = data.getDayOfMonth() + "/" + data.getMonthValue() + "/" + data.getYear();	 //uso try catch per la gestione errori 	
 		}
-	}
+		catch(DateTimeException e) {
+			
+			e.printStackTrace(); // in caso di errore restituisce stringa vuota
+			
+		}
+		
+			return ld;
+			
+		}
 
-	public LocalDate stringToDate(String data) {
 
+	public LocalDate stringToDate(String data) {	
+		
 		Integer dd = Integer.valueOf(data.split("/")[0]);
 		Integer mm = Integer.valueOf(data.split("/")[1]);
 		Integer yyyy = Integer.valueOf(data.split("/")[2]);

@@ -1,22 +1,21 @@
 package it.terzaFila.autonoleggio;
 
-<<<<<<< HEAD
+
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import entity.Auto;
+import it.terzaFila.autonoleggio.entity.Auto;
 
-=======
+
 import java.util.Scanner;
 
->>>>>>> origin/master
+
 public class MenuPrincipale {
 
 	public void menuAccessoUtente() {
 
-		Scanner scanner = new Scanner(System.in);
-		
-<<<<<<< HEAD
+		Scanner scanner = new Scanner(System.in);		
+
 		boolean loggedIn = false; // ma serve?
 		boolean ripeti = true;
 
@@ -27,34 +26,22 @@ public class MenuPrincipale {
 			System.out.println("1. Accedi");
 			System.out.println("2. Registrati");
 			System.out.println("0. Esci");
-=======
-		boolean loggedIn = false;
 
-		while (true) {
-			System.out.println("Benvenuto nell'autonoleggio!");
-			System.out.println("Scegli un'opzione:");
-			System.out.println("1. Accedi");
-			System.out.println("2. Registrati");
-			System.out.println("3. Esci");
->>>>>>> origin/master
 
 			int scelta = scanner.nextInt();
 
 			switch (scelta) {
-<<<<<<< HEAD
-			
-=======
->>>>>>> origin/master
+
 			case 1:
 				if (!loggedIn) {
-					Login login = new Login();
+					Login login = new Login(); //se usi un metodo statico?
 				    login.accesso();
 					loggedIn = true;
 				} else {
 					System.out.println("Sei già loggato!");
 				}
 				break;
-<<<<<<< HEAD
+
 				
 			case 2:
 				RegistrazioneCliente.registraCliente();
@@ -135,7 +122,7 @@ public class MenuPrincipale {
 	        System.out.println("3. Rimuovere un'auto dalla lista");
 	        System.out.println("4. Torna al menù iniziale");
 	        System.out.println("_______________________________________");
-	        System.out.println("0. Esci dall'applicazione");
+	        System.out.println("0. Esci dall'applicazione"); // per il salvataggio?
 
 	        int scelta = scanner.nextInt();
 
@@ -167,25 +154,4 @@ public class MenuPrincipale {
 	}
 
 	
-	
-=======
-			case 2:
-				registrati();
-				break;
-			case 3:
-				System.out.println("Arrivederci!");
-				System.exit(0);
-			default:
-				System.out.println("Scelta non valida. Riprova.");
-			}
-		}
-	}
-
->>>>>>> origin/master
-	public static void accedi() {
-		// Qui implementa la logica per l'accesso
-		System.out.println("Hai effettuato l'accesso con successo!");
-	}
-
-
 }
