@@ -1,4 +1,10 @@
-1,Marchio2,Modello2,15000.0,true
-2,Marchio3,Modello3,12000.0,false
-3,Marchio4,Modello4,14000.0,false
-4,Marchio5,Modello5,12000.0,false
+1,Toyota,Corolla,25.0,false
+2,Ford,Focus,22.0,false
+3,BMW,Serie3,35.0,false
+4,Audi,A4,32.0,false
+5,Mercedes-Benz,ClasseC,38.0,false
+6,Fiat,Panda,22.0,false
+99,Batmarchio,Batmodello,99.0,false,true
+98,Batmarchio2,Batmodello2,98.0,false,true
+7,Ferrari,F2024,100.0,false
+

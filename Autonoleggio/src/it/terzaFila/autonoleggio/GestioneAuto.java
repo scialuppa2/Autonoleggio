@@ -22,34 +22,54 @@ public class GestioneAuto {
 	}
 
 	private void leggiAutoDaFile() {
-		try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-			String line;
-			while ((line = reader.readLine()) != null) {
-				String[] parts = line.split(",");
-				int idAuto = Integer.parseInt(parts[0].trim());
-                String marchio = parts[1].trim(); 
-				String modello = parts[2].trim();
-				float prezzo = Float.parseFloat(parts[3].trim());
-				boolean prenotata = Boolean.parseBoolean(parts[4].trim());
 
-				Auto auto = new Auto(idAuto, marchio, modello, prezzo);
-				auto.setPrenotata(prenotata);
-				autoList.add(auto);
-			}
-		} catch (IOException e) {
-			System.out.println("Si è verificato un errore durante la lettura del file: " + e.getMessage());
-		}
+
+	    try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            String[] parts = line.split(",");
+	            if (parts.length >= 5) { // Assicurati che ci siano almeno 5 elementi nella riga
+	                int idAuto = Integer.parseInt(parts[0].trim());
+	                String marchio = parts[1].trim();
+	                String modello = parts[2].trim();
+	                float prezzo = Float.parseFloat(parts[3].trim());
+	                boolean prenotata = Boolean.parseBoolean(parts[4].trim());
+	                boolean isBatmobile = false; // Impostazione predefinita per isBatmobile
+
+	                if (parts.length >= 6) { // Verifica se c'è un sesto elemento
+	                    isBatmobile = Boolean.parseBoolean(parts[5].trim()); // Leggi il valore booleano isBatmobile
+	                }
+
+	                Auto auto = new Auto(idAuto, marchio, modello, prezzo);
+	                auto.setPrenotata(prenotata);
+	                auto.setIsBatmobile(isBatmobile); // Imposta isBatmobile
+	                autoList.add(auto);
+	            } else {
+	                System.out.println("La riga non contiene abbastanza elementi: " + line);
+	            }
+	        }
+	    } catch (IOException e) {
+	        System.out.println("Si è verificato un errore durante la lettura del file: " + e.getMessage());
+	    }
 	}
 
-	public static void stampaListaAuto() {
-		System.out.println("==============================================");
-		System.out.println("         Lista delle auto disponibili:        ");
-		System.out.println("==============================================");
 
-		for (Auto auto : autoList) {
-			System.out.println(auto);
-		}
+
+	public static void stampaListaAuto(boolean isBatman) {
+	    System.out.println("==============================================");
+	    System.out.println("         Lista delle auto disponibili:        ");
+	    System.out.println("==============================================");
+
+	    for (Auto auto : autoList) {
+	        // Se l'utente non è Batman e l'auto è una Batmobile, passa alla prossima iterazione del ciclo
+	        if (!isBatman && auto.isBatmobile()) {
+	            continue;
+	        }
+	        System.out.println(auto);
+	    }
 	}
+
+
 
 	public static void aggiungiAuto() {
 		Scanner scanner = new Scanner(System.in);
@@ -79,6 +99,8 @@ public class GestioneAuto {
 
 	}
 
+
+
 	public static void rimuoviAuto() {
 	    Scanner scanner = new Scanner(System.in);
 	    
@@ -107,17 +129,6 @@ public class GestioneAuto {
 	    
 	}
 
-
-	private static void salvaAutoSuFile() {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
-            for (Auto auto : autoList) {
-                writer.println(auto.getIdAuto() + "," + auto.getMarchio() + "," + auto.getModello() + "," + auto.getPrezzo() + "," + auto.isPrenotata());
-            }
-        } catch (IOException e) {
-            System.out.println("Si è verificato un errore durante il salvataggio delle auto su file: " + e.getMessage());
-        }
-    }
-	
 	private List<Auto> findPrice(float prezzo){	
 		
 		List<Auto> research = new ArrayList<Auto>();
@@ -152,4 +163,24 @@ public class GestioneAuto {
 			
 			
 		}
+
+	
+	private static void salvaAutoSuFile() {
+	    try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
+	        for (Auto auto : autoList) {
+	            if (auto.isBatmobile()) {
+	                writer.println(auto.getIdAuto() + "," + auto.getMarchio() + "," + auto.getModello() + "," + auto.getPrezzo() + "," + auto.isPrenotata() + "," + auto.isBatmobile());
+	            } else {
+	                writer.println(auto.getIdAuto() + "," + auto.getMarchio() + "," + auto.getModello() + "," + auto.getPrezzo() + "," + auto.isPrenotata());
+	            }
+	        }
+	    } catch (IOException e) {
+	        System.out.println("Si è verificato un errore durante il salvataggio delle auto su file: " + e.getMessage());
+	    }
+	}
+
+
+
+	
+
 }
