@@ -48,13 +48,14 @@ public class Login {
 					// Passa il valore di isBatman al metodo stampaListaAuto() solo se l'utente è
 					// Batman
 					GestioneAuto.stampaListaAuto(true);
-					return; // Esci dal metodo dopo aver chiamato il menu di Batman
 				}
 			} else {
 				System.out.println("Password errata. Accesso negato.");
+				accesso();
 			}
 		} else {
 			System.out.println("Email non trovata. Accesso negato.");
+			accesso();
 		}
 
 	}

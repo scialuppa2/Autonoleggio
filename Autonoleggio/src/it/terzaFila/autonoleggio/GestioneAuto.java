@@ -14,7 +14,7 @@ import java.util.Scanner;
 import it.terzaFila.autonoleggio.entity.Auto;
 
 public class GestioneAuto {
-    private static String FILE_PATH = "auto.txt";
+	private static String FILE_PATH = "auto.txt";
 	private static List<Auto> autoList;
 
 	public GestioneAuto(String FILE_PATH) {
@@ -24,82 +24,82 @@ public class GestioneAuto {
 	}
 
 	private void leggiAutoDaFile() {
-	    try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-	        String line;
-	        while ((line = reader.readLine()) != null) {
-	            String[] parts = line.split(",");
-	            if (parts.length >= 5) { // Assicurati che ci siano almeno 5 elementi nella riga
-	                int idAuto = Integer.parseInt(parts[0].trim());
-	                String marchio = parts[1].trim();
-	                String modello = parts[2].trim();
-	                float prezzo = Float.parseFloat(parts[3].trim());
-	                boolean prenotata = Boolean.parseBoolean(parts[4].trim());
-	                boolean isBatmobile = false; // Impostazione predefinita per isBatmobile
+		try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				String[] parts = line.split(",");
+				if (parts.length >= 5) { // Assicurati che ci siano almeno 5 elementi nella riga
+					int idAuto = Integer.parseInt(parts[0].trim());
+					String marchio = parts[1].trim();
+					String modello = parts[2].trim();
+					float prezzo = Float.parseFloat(parts[3].trim());
+					boolean prenotata = Boolean.parseBoolean(parts[4].trim());
+					boolean isBatmobile = false; // Impostazione predefinita per isBatmobile
 
-	                if (parts.length >= 6) { // Verifica se c'è un sesto elemento
-	                    isBatmobile = Boolean.parseBoolean(parts[5].trim()); // Leggi il valore booleano isBatmobile
-	                }
+					if (parts.length >= 6) { // Verifica se c'è un sesto elemento
+						isBatmobile = Boolean.parseBoolean(parts[5].trim()); // Leggi il valore booleano isBatmobile
+					}
 
-	                Auto auto = new Auto(idAuto, marchio, modello, prezzo);
-	                auto.setPrenotata(prenotata);
-	                auto.setIsBatmobile(isBatmobile); // Imposta isBatmobile
-	                autoList.add(auto);
-	            } else {
-	                System.out.println("La riga non contiene abbastanza elementi: " + line);
-	            }
-	        }
-	    } catch (IOException e) {
-	        System.out.println("Si è verificato un errore durante la lettura del file: " + e.getMessage());
-	    }
+					Auto auto = new Auto(idAuto, marchio, modello, prezzo);
+					auto.setPrenotata(prenotata);
+					auto.setIsBatmobile(isBatmobile); // Imposta isBatmobile
+					autoList.add(auto);
+				} else {
+					System.out.println("La riga non contiene abbastanza elementi: " + line);
+				}
+			}
+		} catch (IOException e) {
+			System.out.println("Si è verificato un errore durante la lettura del file: " + e.getMessage());
+		}
 	}
 
-
 	public static void stampaListaAuto(boolean isBatman) {
-	    System.out.println("==============================================");
-	    System.out.println("         Lista delle auto disponibili:        ");
-	    System.out.println("==============================================");
+		System.out.println("==============================================");
+		System.out.println("         Lista delle auto disponibili:        ");
+		System.out.println("==============================================");
 
-	    for (Auto auto : autoList) {
-	        // Se l'utente non è Batman e l'auto è una Batmobile, passa alla prossima iterazione del ciclo
-	        if (!isBatman && auto.isBatmobile()) {
-	            continue;
-	        }
-	        System.out.println(auto);
-	    }
+		for (Auto auto : autoList) {
+			// Se l'utente non è Batman e l'auto è una Batmobile, passa alla prossima
+			// iterazione del ciclo
+			if (!isBatman && auto.isBatmobile()) {
+				continue;
+			}
+			System.out.println(auto);
+		}
 	}
 
 	public static void aggiungiAuto() {
 		Scanner scanner = new Scanner(System.in);
 
 		// Richiesta dei dati per la nuova auto
-	    System.out.println("Inserisci l'ID dell'auto:");
-	    int idAuto = scanner.nextInt();
-	    scanner.nextLine(); // Consuma il newline
-	    
-	    // Verifica se l'ID auto esiste già
-	    if (InputValidator.verificaIdAuto(autoList, idAuto)) {
-	        System.out.println("L'ID auto inserito esiste già. Inserisci un ID auto diverso.");
-	        // Non uscire dal metodo, permetti all'utente di inserire un nuovo ID auto
-	    } else {
+		System.out.println("Inserisci l'ID dell'auto:");
+		int idAuto = scanner.nextInt();
+		scanner.nextLine(); // Consuma il newline
 
-		System.out.println("Inserisci il marchio dell'auto:");
-		String marchio = scanner.nextLine();
+		// Verifica se l'ID auto esiste già
+		if (InputValidator.verificaIdAuto(autoList, idAuto)) {
+			System.out.println("L'ID auto inserito esiste già. Inserisci un ID auto diverso.");
+			// Non uscire dal metodo, permetti all'utente di inserire un nuovo ID auto
+		} else {
 
-		System.out.println("Inserisci il modello dell'auto:");
-		String modello = scanner.nextLine();
+			System.out.println("Inserisci il marchio dell'auto:");
+			String marchio = scanner.nextLine();
 
-		System.out.println("Inserisci il prezzo dell'auto:");
-		float prezzo = scanner.nextFloat();
+			System.out.println("Inserisci il modello dell'auto:");
+			String modello = scanner.nextLine();
 
-		// Creazione dell'oggetto Auto con i dati inseriti dall'utente
-		Auto nuovaAuto = new Auto(idAuto, marchio, modello, prezzo);
+			System.out.println("Inserisci il prezzo dell'auto:");
+			float prezzo = scanner.nextFloat();
 
-		// Aggiunta della nuova auto alla lista
-		autoList.add(nuovaAuto);
+			// Creazione dell'oggetto Auto con i dati inseriti dall'utente
+			Auto nuovaAuto = new Auto(idAuto, marchio, modello, prezzo);
 
-		// Salvataggio delle modifiche su file
-		salvaAutoSuFile();
-	    }
+			// Aggiunta della nuova auto alla lista
+			autoList.add(nuovaAuto);
+
+			// Salvataggio delle modifiche su file
+			salvaAutoSuFile();
+		}
 
 	}
 
@@ -107,34 +107,34 @@ public class GestioneAuto {
 		Scanner scanner = new Scanner(System.in);
 
 		// Richiesta dei dati per la nuova auto
-	    System.out.println("Inserisci l'ID dell'auto:");
-	    int idAuto = scanner.nextInt();
-	    scanner.nextLine(); // Consuma il newline
-	    
-	    // Verifica se l'ID auto esiste già
-	    if (InputValidator.verificaIdAuto(autoList, idAuto)) {
-	        System.out.println("L'ID auto inserito esiste già. Inserisci un ID auto diverso.");
-	        // Non uscire dal metodo, permetti all'utente di inserire un nuovo ID auto
-	    } else {
+		System.out.println("Inserisci l'ID dell'auto:");
+		int idAuto = scanner.nextInt();
+		scanner.nextLine(); // Consuma il newline
 
-		System.out.println("Inserisci il marchio della Batmobile:");
-		String marchio = scanner.nextLine();
+		// Verifica se l'ID auto esiste già
+		if (InputValidator.verificaIdAuto(autoList, idAuto)) {
+			System.out.println("L'ID auto inserito esiste già. Inserisci un ID auto diverso.");
+			// Non uscire dal metodo, permetti all'utente di inserire un nuovo ID auto
+		} else {
 
-		System.out.println("Inserisci il modello della Batmobile:");
-		String modello = scanner.nextLine();
+			System.out.println("Inserisci il marchio della Batmobile:");
+			String marchio = scanner.nextLine();
 
-		System.out.println("Inserisci il prezzo della Batmobile:");
-		float prezzo = scanner.nextFloat();
+			System.out.println("Inserisci il modello della Batmobile:");
+			String modello = scanner.nextLine();
 
-		// Creazione dell'oggetto Batmobile con i dati inseriti da Batman
-		Auto nuovaBatmobile = new Auto(idAuto, marchio, modello, prezzo, true); // Passa true per isBatmobile
+			System.out.println("Inserisci il prezzo della Batmobile:");
+			float prezzo = scanner.nextFloat();
 
-		// Aggiunta della nuova Batmobile alla lista
-		autoList.add(nuovaBatmobile);
+			// Creazione dell'oggetto Batmobile con i dati inseriti da Batman
+			Auto nuovaBatmobile = new Auto(idAuto, marchio, modello, prezzo, true); // Passa true per isBatmobile
 
-		// Salvataggio delle modifiche su file
-		salvaAutoSuFile();
-	    }
+			// Aggiunta della nuova Batmobile alla lista
+			autoList.add(nuovaBatmobile);
+
+			// Salvataggio delle modifiche su file
+			salvaAutoSuFile();
+		}
 	}
 
 	public static void rimuoviAuto() {
@@ -165,19 +165,21 @@ public class GestioneAuto {
 	}
 
 	private static void salvaAutoSuFile() {
-	    try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
-	        for (Auto auto : autoList) {
-	            if (auto.isBatmobile()) {
-	                writer.println(auto.getIdAuto() + "," + auto.getMarchio() + "," + auto.getModello() + "," + auto.getPrezzo() + "," + auto.isPrenotata() + "," + auto.isBatmobile());
-	            } else {
-	                writer.println(auto.getIdAuto() + "," + auto.getMarchio() + "," + auto.getModello() + "," + auto.getPrezzo() + "," + auto.isPrenotata());
-	            }
-	        }
-	    } catch (IOException e) {
-	        System.out.println("Si è verificato un errore durante il salvataggio delle auto su file: " + e.getMessage());
-	    }
+		try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
+			for (Auto auto : autoList) {
+				if (auto.isBatmobile()) {
+					writer.println(auto.getIdAuto() + "," + auto.getMarchio() + "," + auto.getModello() + ","
+							+ auto.getPrezzo() + "," + auto.isPrenotata() + "," + auto.isBatmobile());
+				} else {
+					writer.println(auto.getIdAuto() + "," + auto.getMarchio() + "," + auto.getModello() + ","
+							+ auto.getPrezzo() + "," + auto.isPrenotata());
+				}
+			}
+		} catch (IOException e) {
+			System.out
+					.println("Si è verificato un errore durante il salvataggio delle auto su file: " + e.getMessage());
+		}
 	}
-
 
 	private List<Auto> findPrice(float prezzo) {
 
@@ -207,11 +209,6 @@ public class GestioneAuto {
 			}
 
 		}
-
-		return research;
-
-	}
-	
 	
 	public static boolean isDisponible(Auto current, LocalDate pStart, int durata) {
 		
@@ -252,5 +249,6 @@ public class GestioneAuto {
 	
 	
 	}
+
 
 }
