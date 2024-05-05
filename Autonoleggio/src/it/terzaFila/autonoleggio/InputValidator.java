@@ -8,9 +8,9 @@ public class InputValidator {
         return nome.matches("[A-Z][a-zA-Z]*");
     }
 
-    public static boolean validaCognome(String cognome) {
-        return cognome.matches("[A-Z][a-zA-Z']*");
-    }
+	public static boolean validaCognome(String cognome) {
+	    return cognome.matches("[A-Z][a-zA-Z'\\s]+");
+	}
     
     public static String formattaNome(String nome) {
         if (nome == null || nome.isEmpty()) {
