@@ -10,7 +10,8 @@ public class RegistrazioneCliente {
     public static void registraCliente() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Benvenuto! Inserisci i tuoi dati per la registrazione:");
+        System.out.println("Ciao nuovo cliente !");
+        System.out.println("Inserisci i tuoi dati per la registrazione:");
 
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
@@ -44,19 +45,29 @@ public class RegistrazioneCliente {
             password = scanner.nextLine();
         }
 
-        // Scrivi i dati su un file di testo
+     // Scrivi i dati completi del cliente su un file di testo separato
         try {
-            PrintWriter writer = new PrintWriter(new FileWriter("clienti.txt", true));
-            writer.println("Nome: " + nome);
-            writer.println("Cognome: " + cognome);
-            writer.println("Email: " + email);
-            writer.println("Password: " + password);
-            writer.println(); // Aggiungi una riga vuota per separare i dati
-            writer.close();
-            System.out.println("Registrazione completata! I dati sono stati salvati.");
+            PrintWriter clientiWriter = new PrintWriter(new FileWriter("utenti.txt", true));
+            clientiWriter.println(nome + "," + cognome + "," + email + "," + password);
+            clientiWriter.println(); // Aggiungi una riga vuota per separare i dati
+            clientiWriter.close();
+            System.out.println("Registrazione completata! I tuoi dati sono stati salvati.");
         } catch (IOException e) {
-            System.out.println("Si è verificato un errore durante il salvataggio dei dati.");
+            System.out.println("Si è verificato un errore durante il salvataggio dei dati del cliente.");
             e.printStackTrace();
         }
+
+
+        /* Scrivi solo email e password su un file separato per le credenziali
+        try {
+            PrintWriter utentiWriter = new PrintWriter(new FileWriter("utenti.txt", true));
+            utentiWriter.println(email + ":" + password);
+            utentiWriter.close();
+            System.out.println("Le credenziali sono state salvate.");
+        } catch (IOException e) {
+            System.out.println("Si è verificato un errore durante il salvataggio delle credenziali.");
+            e.printStackTrace();
+        }*/
+
     }
 }
