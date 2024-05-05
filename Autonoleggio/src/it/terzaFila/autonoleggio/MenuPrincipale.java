@@ -70,60 +70,61 @@ public class MenuPrincipale {
 
 	
 	public static void menuCliente() {
-
-		Scanner scanner = new Scanner(System.in);
-		Float prezzo = (float) 0;
-		String modello = "";
-		// Creare un'istanza di GestioneAuto
+	    Scanner scanner = new Scanner(System.in);
+	    Float prezzo = (float) 0;
+	    String modello = "";
+	    // Creare un'istanza di GestioneAuto
 	    GestioneAuto gestioneAuto = new GestioneAuto("auto.txt");
-		
-		boolean ripeti = true;
-		System.out.println("========================================");
-		System.out.println("      RICERCA L'AUTO DA NOLEGGIARE      ");
-		System.out.println("========================================");
 
-		while (ripeti) {
-			System.out.println("==========================");
-			System.out.println("    Scegli un'opzione:   ");
-			System.out.println("==========================");
-			System.out.println("1. Cerca auto per prezzo ");
-			System.out.println("2. Cerca auto per modello ");
-			System.out.println("3. Torna al menù iniziale ");
-			System.out.println("__________________________");
-			System.out.println("0. Esci");
+	    boolean ripeti = true;
+	    System.out.println("========================================");
+	    System.out.println("      RICERCA L'AUTO DA NOLEGGIARE      ");
+	    System.out.println("========================================");
 
-			int scelta = scanner.nextInt();
+	    while (ripeti) {
+	        System.out.println("==========================");
+	        System.out.println("    Scegli un'opzione:   ");
+	        System.out.println("==========================");
+	        System.out.println("1. Cerca auto per prezzo ");
+	        System.out.println("2. Cerca auto per modello ");
+	        System.out.println("3. Torna al menù iniziale ");
+	        System.out.println("__________________________");
+	        System.out.println("0. Esci");
 
-			switch (scelta) {
-            case 1:
-                System.out.println("Inserisci Prezzo:");
-                prezzo = scanner.nextFloat();
-                scanner.nextLine();
-                List<Auto> autoPerPrezzo = gestioneAuto.findPrice(prezzo);
-                stampaRicercaAuto(autoPerPrezzo);
-                break;
+	        int scelta = scanner.nextInt();
 
-            case 2:
-            	scanner.nextLine();
-                System.out.println("Inserisci Modello:");
-                modello = scanner.nextLine();
-                List<Auto> autoPerModello = gestioneAuto.findModel(modello);
-                stampaRicercaAuto(autoPerModello);
-                break;
+	        switch (scelta) {
+	            case 1:
+	                System.out.println("Inserisci Prezzo:");
+	                prezzo = scanner.nextFloat();
+	                scanner.nextLine();
+	                List<Auto> autoPerPrezzo = gestioneAuto.findPrice(prezzo);
+	                stampaRicercaAuto(autoPerPrezzo);
+	                gestioneNoleggio(autoPerPrezzo, scanner); // Corretto il passaggio dei risultati della ricerca
+	                break;
 
-            case 3:
-                menuAccessoUtente();
-                break;
+	            case 2:
+	                scanner.nextLine();
+	                System.out.println("Inserisci Modello:");
+	                modello = scanner.nextLine();
+	                List<Auto> autoPerModello = gestioneAuto.findModel(modello);
+	                stampaRicercaAuto(autoPerModello);
+	                gestioneNoleggio(autoPerModello, scanner); // Corretto il passaggio dei risultati della ricerca
+	                break;
 
-            default:
-                System.out.println("Arrivederci!");
-                return;
-			}
-		}
-		
-		scanner.close();
+	            case 3:
+	                menuAccessoUtente();
+	                break;
+
+	            default:
+	                System.out.println("Arrivederci!");
+	                return;
+	        }
+	    }
+
+	    scanner.close();
 	}
-	
+
 	private static void stampaRicercaAuto(List<Auto> autoList) {
 	    System.out.println("\n Risultati della ricerca: \n");
 	    if (autoList.isEmpty()) {
@@ -134,6 +135,49 @@ public class MenuPrincipale {
 	        }
 	    }
 	}
+
+	private static void gestioneNoleggio(List<Auto> risultatiRicerca, Scanner scanner) {
+	    System.out.println("_________________________________");
+	    System.out.println("Desideri noleggiare un'auto? (S/N)");
+	    String risposta = scanner.next();
+	    if (risposta.equalsIgnoreCase("S")) {
+	        System.out.println("Inserisci l'ID dell'auto da noleggiare:");
+	        int idAuto = scanner.nextInt();
+
+	        // Consuma il carattere di nuova riga rimanente nel buffer
+	        scanner.nextLine();
+
+	        // Ottenere le date di inizio e fine noleggio dall'utente
+	        System.out.println("Inserisci la data di inizio noleggio (YYYY-MM-DD):");
+	        LocalDate dataInizio = LocalDate.parse(scanner.nextLine());
+	        System.out.println("Inserisci la data di fine noleggio (YYYY-MM-DD):");
+	        LocalDate dataFine = LocalDate.parse(scanner.nextLine());
+
+	        for (Auto auto : risultatiRicerca) {
+	            if (auto.getIdAuto() == idAuto) {
+	                if (!auto.isPrenotata()) {
+	                    // Segna l'auto come prenotata e salva le modifiche
+	                    auto.setPrenotata(true);
+	                    auto.setData(dataInizio); // Imposta la data di inizio noleggio
+	                    auto.setDurata(dataFine); // Imposta la data di fine noleggio
+	                    System.out.println("Auto noleggiata con successo!");
+
+	                    // Salva le modifiche nel file auto.txt
+	                    GestioneAuto.salvaAutoSuFile();
+
+	                    return;
+	                } else {
+	                    System.out.println("Questa auto è già stata noleggiata.");
+	                    return;
+	                }
+	            }
+	        }
+	        System.out.println("Nessuna auto trovata con l'ID specificato.");
+	    }
+	}
+
+
+
 	
 	public static void menuAdmin() {
 

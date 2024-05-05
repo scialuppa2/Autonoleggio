@@ -95,8 +95,8 @@ public class Auto {
 		return data;
 	}
 
-	public void setData(String data) {
-		this.data = this.stringToDate(data);
+	public void setData(LocalDate data) {
+		this.data = data;
 	}
 
 	public LocalDate getDurata() {

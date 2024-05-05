@@ -162,7 +162,7 @@ public class GestioneAuto {
 
 	}
 
-	private static void salvaAutoSuFile() {
+	public static void salvaAutoSuFile() {
 		try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
 			for (Auto auto : autoList) {
 				if (auto.isBatmobile()) {
@@ -170,7 +170,8 @@ public class GestioneAuto {
 							+ auto.getPrezzo() + "," + auto.isPrenotata() + "," + auto.isBatmobile());
 				} else {
 					writer.println(auto.getIdAuto() + "," + auto.getMarchio() + "," + auto.getModello() + ","
-							+ auto.getPrezzo() + "," + auto.isPrenotata());
+	                        + auto.getPrezzo() + "," + auto.isPrenotata()
+	                        + "," + auto.getData() + "," + auto.getDurata());
 				}
 			}
 		} catch (IOException e) {
