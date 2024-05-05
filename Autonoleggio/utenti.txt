@@ -1,0 +1,10 @@
+
+
+
+
+Bruce,Wayne,brucewayne@gotham.com,sonobruce,admin
+
+Batman,Supereroe,batman@pipistrello.com,sonobatman,batman
+
+Fabrizio,D'alessandro,scialuppa2@gmail.com,12345678,user
+

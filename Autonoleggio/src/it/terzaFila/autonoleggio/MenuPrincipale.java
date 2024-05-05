@@ -8,7 +8,7 @@ import it.terzaFila.autonoleggio.entity.Auto;
 
 public class MenuPrincipale {
 
-	public void menuAccessoUtente() {
+	public static void menuAccessoUtente() {
 
 		Scanner scanner = new Scanner(System.in);
 		
@@ -54,7 +54,7 @@ public class MenuPrincipale {
 	}
 
 	
-	public void menuCliente() {
+	public static void menuCliente() {
 
 		Scanner scanner = new Scanner(System.in);
 		Float prezzo = (float) 0;
@@ -96,7 +96,7 @@ public class MenuPrincipale {
 		scanner.close();
 	}
 	
-	public void menuAdmin() {
+	public static void menuAdmin() {
 
 		Scanner scanner = new Scanner(System.in);
 		GestioneAuto gestioneAuto = new GestioneAuto("auto.txt");
@@ -124,7 +124,7 @@ public class MenuPrincipale {
 
 	        switch (scelta) {
 	            case 1:
-	            	GestioneAuto.stampaListaAuto();
+	            	GestioneAuto.stampaListaAuto(false);
 	                break;
 	            case 2:
 	            	GestioneAuto.aggiungiAuto();
@@ -148,12 +148,70 @@ public class MenuPrincipale {
 
 	    scanner.close();
 	}
-
 	
-	public static void accedi() {
-		// Qui implementa la logica per l'accesso
-		System.out.println("Hai effettuato l'accesso con successo!");
+	public static void menuBatman() {
+	    Scanner scanner = new Scanner(System.in);
+	    GestioneAuto gestioneAuto = new GestioneAuto("auto.txt");
+	    Float prezzo = (float) 0;
+	    String modello = "";
+
+	    boolean prenotata = false;
+	    LocalDate data = null;
+	    LocalDate durata = null;
+
+	    boolean ripeti = true;
+
+	    while (ripeti) {
+	    	System.out.println("======================================");
+	    	System.out.println("          BENTORNATO BATMAN:         ");
+	    	System.out.println("======================================");
+	    	System.out.println("⠈⠙⠲⢶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣿⡀⠀⠀⠀⠀⠀⠀⠀⡄⠀⠀⡄⠀⠀⠀⠀⠀⠀⠀⣼⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣿⠟⠓⠉\r\n"
+	    			+ "⠀⠀⠀⠀⠈⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⢀⣧⣶⣦⣇⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠉⠀⠀⠀⠀\r\n"
+	    			+ "⠀⠀⠀⠀⠀⠀⠀⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣶⣾⣿⣿⣿⣿⣶⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀\r\n"
+	    			+ "⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    			+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    			+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠛⠛⠛⠛⠛⠛⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠟⠛⠛⠛⠛⠛⠛⠃⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    			+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    			+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    			+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    			+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    			+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    			+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    			+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    			+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+	        System.out.println("1. Stampare lista auto disponibili");
+	        System.out.println("2. Aggiungi nuova batmobile");
+	        System.out.println("3. Rimuovere una batmobile dalla lista");
+	        System.out.println("4. Torna al menù iniziale");
+	        System.out.println("_______________________________________");
+	        System.out.println("0. Esci dall'applicazione");
+
+	        int scelta = scanner.nextInt();
+
+	        switch (scelta) {
+	            case 1:
+	                GestioneAuto.stampaListaAuto(true);
+	                break;
+	            case 2:
+	                GestioneAuto.aggiungiBatmobile();
+	                break;
+	            case 3:
+	                GestioneAuto.rimuoviAuto();
+	                break;
+	            case 4:
+	                menuAccessoUtente();
+	                break;
+	            case 0:
+	                System.out.println("Grazie e arrivederci !");
+	                ripeti = false;
+	                break;
+	            default:
+	                System.out.println("Scelta non valida. Riprova.");
+	                break;
+	        }
+	    }
 	}
+
 
 
 }
