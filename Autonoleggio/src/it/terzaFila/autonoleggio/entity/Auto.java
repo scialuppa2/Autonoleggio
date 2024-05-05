@@ -1,6 +1,5 @@
 package it.terzaFila.autonoleggio.entity;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 
 // 6/5 come consegna voglio il link e il jar file dell'eseguibile
@@ -24,21 +23,24 @@ public class Auto {
     private String marchio;
     private String modello;
     private float prezzo;
-    private boolean batman = false;
+    private boolean isBatmobile = false;
     private boolean prenotata = false;
     private LocalDate data = null;
     private LocalDate durata = null;
 
- // Costruttore
+ // Costruttore senza il parametro isBatmobile
     public Auto(int idAuto, String marchio, String modello, float prezzo) {
-    	
+        this(idAuto, marchio, modello, prezzo, false); // Chiama l'altro costruttore con isBatmobile impostato a false
+    }
+
+    // Costruttore con tutti i parametri, incluso isBatmobile
+    public Auto(int idAuto, String marchio, String modello, float prezzo, boolean isBatmobile) {
         this.idAuto = idAuto;
         this.marchio = marchio;
         this.modello = modello;
         this.prezzo = prezzo;
-		this.batman = batman;
-
-	}
+        this.isBatmobile = isBatmobile;
+    }
     
     
 	public int getIdAuto() {
@@ -73,12 +75,12 @@ public class Auto {
 		this.prezzo = prezzo;
 	}
 
-	public boolean isBatman() {
-		return batman;
+	public boolean isBatmobile() {
+		return isBatmobile;
 	}
 
-	public void setBatman(boolean batman) {
-		this.batman = batman;
+	public void setIsBatmobile(boolean isBatmobile) {
+		this.isBatmobile = isBatmobile;
 	}
 
 	public boolean isPrenotata() {
@@ -106,26 +108,15 @@ public class Auto {
 	}
 
 	public String dateToString(LocalDate data) {
-		
-		String ld = "";
-		
-		try {		
-			
-			 ld = data.getDayOfMonth() + "/" + data.getMonthValue() + "/" + data.getYear();	 //uso try catch per la gestione errori 	
+		if (data != null) {
+			return data.getDayOfMonth() + "/" + data.getMonthValue() + "/" + data.getYear();
+		} else {
+			return "N/D"; // O qualsiasi altra stringa di default per rappresentare una data nulla
 		}
-		catch(DateTimeException e) {
-			
-			e.printStackTrace(); // in caso di errore restituisce stringa vuota
-			
-		}
-		
-			return ld;
-			
-		}
+	}
 
+	public LocalDate stringToDate(String data) {
 
-	public LocalDate stringToDate(String data) {	
-		
 		Integer dd = Integer.valueOf(data.split("/")[0]);
 		Integer mm = Integer.valueOf(data.split("/")[1]);
 		Integer yyyy = Integer.valueOf(data.split("/")[2]);
@@ -142,3 +133,4 @@ public class Auto {
 
 
 }
+
