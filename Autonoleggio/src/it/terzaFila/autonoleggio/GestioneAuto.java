@@ -179,7 +179,7 @@ public class GestioneAuto {
 		}
 	}
 
-	private List<Auto> findPrice(float prezzo) {
+	public List<Auto> findPrice(float prezzo) {
 
 		List<Auto> research = new ArrayList<Auto>();
 
@@ -195,7 +195,7 @@ public class GestioneAuto {
 
 	}
 
-	private List<Auto> findModel(String model) {
+	public List<Auto> findModel(String model) {
 
 		List<Auto> research = new ArrayList<Auto>();
 

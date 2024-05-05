@@ -1,6 +1,7 @@
 package it.terzaFila.autonoleggio;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 import it.terzaFila.autonoleggio.entity.Auto;
@@ -73,46 +74,65 @@ public class MenuPrincipale {
 		Scanner scanner = new Scanner(System.in);
 		Float prezzo = (float) 0;
 		String modello = "";
+		// Creare un'istanza di GestioneAuto
+	    GestioneAuto gestioneAuto = new GestioneAuto("auto.txt");
 		
 		boolean ripeti = true;
+		System.out.println("========================================");
+		System.out.println("      RICERCA L'AUTO DA NOLEGGIARE      ");
+		System.out.println("========================================");
 
 		while (ripeti) {
-			
-			System.out.println("\n --- Cerca auto --- \n");
-			System.out.println("Scegli un'opzione:");
-			System.out.println("1. per prezzo");
-			System.out.println("2. Modello");
-			System.out.println("3. Torna al menù iniziale");
+			System.out.println("==========================");
+			System.out.println("    Scegli un'opzione:   ");
+			System.out.println("==========================");
+			System.out.println("1. Cerca auto per prezzo ");
+			System.out.println("2. Cerca auto per modello ");
+			System.out.println("3. Torna al menù iniziale ");
+			System.out.println("__________________________");
 			System.out.println("0. Esci");
 
 			int scelta = scanner.nextInt();
 
 			switch (scelta) {
-			
-			case 1:
-				System.out.println("Inserisci Prezzo");
-				prezzo = scanner.nextFloat();
-				// TODO ricerca(prezzo);
-				break;
-				
-			case 2:
-				System.out.println("Inserisci modello");
-				modello = scanner.nextLine();
-				// TODO ricerca(modello);
-				break;
-				
-			case 3:
+            case 1:
+                System.out.println("Inserisci Prezzo:");
+                prezzo = scanner.nextFloat();
+                scanner.nextLine();
+                List<Auto> autoPerPrezzo = gestioneAuto.findPrice(prezzo);
+                stampaRicercaAuto(autoPerPrezzo);
+                break;
+
+            case 2:
+            	scanner.nextLine();
+                System.out.println("Inserisci Modello:");
+                modello = scanner.nextLine();
+                List<Auto> autoPerModello = gestioneAuto.findModel(modello);
+                stampaRicercaAuto(autoPerModello);
+                break;
+
+            case 3:
                 menuAccessoUtente();
                 break;
-				
-			default:
-				System.out.println("Arrivederci!");
-				//System.exit(0);
-				return;			
+
+            default:
+                System.out.println("Arrivederci!");
+                return;
 			}
 		}
 		
 		scanner.close();
+	}
+	
+	private static void stampaRicercaAuto(List<Auto> autoList) {
+	    System.out.println("\n Risultati della ricerca: \n");
+	    if (autoList.isEmpty()) {
+	        System.out.println("Nessun risultato trovato.");
+	    } else {
+	        for (Auto auto : autoList) {
+	            System.out.println(auto);
+	        }
+	    }
 	}
 	
 	public static void menuAdmin() {
