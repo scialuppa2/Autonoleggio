@@ -69,5 +69,6 @@ public class RegistrazioneCliente {
             e.printStackTrace();
         }*/
 
+        scanner.close();
     }
 }

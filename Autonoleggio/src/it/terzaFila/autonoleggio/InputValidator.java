@@ -1,6 +1,9 @@
 package it.terzaFila.autonoleggio;
 
+import java.util.List;
 import java.util.regex.Pattern;
+
+import it.terzaFila.autonoleggio.entity.Auto;
 
 public class InputValidator {
 
@@ -27,5 +30,15 @@ public class InputValidator {
     public static boolean validaPassword(String password) {
         return password.length() >= 8;
     }
+    
+    public static boolean verificaIdAuto(List<Auto> autoList, int idAuto) {
+        for (Auto auto : autoList) {
+            if (auto.getIdAuto() == idAuto) {
+                return true; // L'ID auto esiste già
+            }
+        }
+        return false; // L'ID auto non esiste
+    }
+
     
 }
