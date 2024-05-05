@@ -6,6 +6,7 @@ import java.util.Scanner;
 import it.terzaFila.autonoleggio.entity.Auto;
 
 
+
 public class MenuPrincipale {
 
 	public static void menuAccessoUtente() {
@@ -27,11 +28,11 @@ public class MenuPrincipale {
 			int scelta = scanner.nextInt();
 
 			switch (scelta) {
-			
-
+          
 			case 1:
 				if (!loggedIn) {
 					Login login = new Login();
+
 				    login.accesso();
 					loggedIn = true;
 				} else {
@@ -213,5 +214,6 @@ public class MenuPrincipale {
 	}
 
 
-
 }
+
+
