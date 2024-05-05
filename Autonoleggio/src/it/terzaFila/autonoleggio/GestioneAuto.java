@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -208,7 +209,37 @@ public class GestioneAuto {
 
 		}
 
+	
+	private boolean isDisponible(Auto current, LocalDate startReserv, LocalDate durata) {
+		
+		LocalDate endReserv = current.getData().plusDays(durata.getDayOfYear());
+		
+		LocalDate autoStart = current.getData();
+		LocalDate autoEnd = autoStart.plusDays(current.getDurata().getDayOfYear());
+		
+		if( startReserv.isAfter( autoStart ) && ( endReserv.isBefore( autoEnd )) )
+			System.out.println("compreso");
+		
+		return false;	
+		
+		/*
+		LocalDate autoStart = LocalDate.of(2023, 5, 15);
+		LocalDate autoEnd = LocalDate.of(2023, 5, 16);
+		LocalDate pStart = LocalDate.of(2023, 5, 1);
+		LocalDate pEnd = LocalDate.of(2023, 5, 30);
+		
+		if( (autoStart.isAfter(pStart) && autoEnd.isBefore(pStart)) || (autoStart.isBefore(pEnd) && autoEnd.isAfter(pEnd))  )
+			System.out.println("compreso");
+		else
+			System.out.println("escluso");
+		
+		
+	}*/
+	
+=======
+
 		return research;
 
 	}
+
 }
