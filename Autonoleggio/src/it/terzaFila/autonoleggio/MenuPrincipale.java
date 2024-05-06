@@ -84,7 +84,7 @@ public class MenuPrincipale {
 			case 2:
 				System.out.println("Inserisci modello");
 				modello = scanner.nextLine();
-				// TODO ricerca(modello);
+				System.out.println( GestioneAuto.findModel(modello).toString() );
 				break;
 				
 			default:

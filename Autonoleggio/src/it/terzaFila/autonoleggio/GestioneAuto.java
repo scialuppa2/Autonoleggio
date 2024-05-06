@@ -14,6 +14,7 @@ import java.util.Scanner;
 import it.terzaFila.autonoleggio.entity.Auto;
 
 public class GestioneAuto {
+	
     private static String FILE_PATH = "auto.txt";
 	private static List<Auto> autoList;
 
@@ -179,7 +180,7 @@ public class GestioneAuto {
 	}
 
 
-	private List<Auto> findPrice(float prezzo) {
+	public static List<Auto> findPrice(float prezzo) {
 
 		List<Auto> research = new ArrayList<Auto>();
 
@@ -195,7 +196,7 @@ public class GestioneAuto {
 
 	}
 
-	private List<Auto> findModel(String model) {
+	public static List<Auto> findModel(String model) {
 
 		List<Auto> research = new ArrayList<Auto>();
 
