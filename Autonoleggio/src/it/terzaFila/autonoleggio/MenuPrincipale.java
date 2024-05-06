@@ -279,21 +279,19 @@ public class MenuPrincipale {
 			scanner.nextLine();
 
 			// Ottenere le date di inizio e fine noleggio dall'utente
-			System.out.println("Inserisci la data di inizio noleggio (YYYY-MM-DD):");
-			LocalDate dataInizio = LocalDate.parse(scanner.nextLine());
+			System.out.println("Inserisci la data di inizio noleggio (DD/MM/YYYY):");
+			
+			LocalDate dataInizio =  Auto.stringToDate(scanner.nextLine());
+			
 			System.out.println("Inserisci la durata del noleggio in giorni");
-			Integer dataFine = 0;
-			try {
-				dataFine = Integer.valueOf( scanner.nextLine() );
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Integer dataFine = Integer.valueOf( scanner.nextInt() ) ;
+			
 
 			for (Auto auto : risultatiRicerca) {
-				System.out.println(GestioneAuto.isDisponible(auto, dataInizio, dataFine));
+				
+				
 				if (auto.getIdAuto() == idAuto) {
-					if (!GestioneAuto.isDisponible(auto, dataInizio, dataFine)) {
+					if ( true) { /*!GestioneAuto.isDisponible(auto, dataInizio, dataFine*/ 
 						
 						// Segna l'auto come prenotata e salva le modifiche
 						auto.setPrenotata(true);
