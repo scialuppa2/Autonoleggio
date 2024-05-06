@@ -31,5 +31,10 @@ RICERCA L'AUTO DA NOLEGGIARE
 3. Cerca auto per modello
 0. Esci
 
+Per testare l'applicazione utilizzare:
+- Accesso Manager -> **email:** brucewayne@gotham.com **password:** sonobruce
+- Accesso Batman  -> **email:** batman@pipistrello.com **password:** sonobatman
+- Accesso Cliente -> **email:** roberta.rez@gmail.com **password:** RobertaRez
+- Accesso Cliente -> **email:** scialuppa2@gmail.com **password:** 12345678
 
 
