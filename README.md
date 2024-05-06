@@ -2,8 +2,8 @@
 
 Il progetto consente la gestione di un autonoleggio, partendo da un menù inziale si può accedere direttamente, registrarsi o uscire dall'applicazione.
 
-MENU:
-Scegli un'opzione:    
+MENU
+Scegli un'opzione    
 1. Accedi
 2. Registrati
 0. Esci
