@@ -6,19 +6,17 @@ import java.util.Scanner;
 
 import it.terzaFila.autonoleggio.entity.Auto;
 
-
-
 public class MenuPrincipale {
 
 	public static void menuAccessoUtente() {
 
 		Scanner scanner = new Scanner(System.in);
-		
+
 		boolean loggedIn = false; // ma serve?
 		boolean ripeti = true;
 
 		while (ripeti) {
-			
+
 			System.out.println("\r\n"
 					+ "                _                    _                  _         _______                 ______ _ _       \r\n"
 					+ "     /\\        | |                  | |                (_)       |__   __|               |  ____(_) |      \r\n"
@@ -42,33 +40,32 @@ public class MenuPrincipale {
 			int scelta = scanner.nextInt(); // se inserisci stringa da errore non gestito
 
 			switch (scelta) {
-          
+
 			case 1:
 				if (!loggedIn) {
 					Login login = new Login();
 
-				    login.accesso();
+					login.accesso();
 					loggedIn = true;
 				} else {
 					System.out.println("Sei già loggato!");
 				}
 				break;
-				
+
 			case 2:
 				RegistrazioneCliente.registraCliente();
 				break;
-				
+
 			default:
 				System.out.println("Arrivederci!");
-				//System.exit(0);
-				return;			
+				// System.exit(0);
+				return;
 			}
 		}
-		
+
 		scanner.close();
 	}
 
-	
 	public static void menuCliente() {
 		Scanner scanner = new Scanner(System.in);
 		Float prezzo = (float) 0;
@@ -99,6 +96,7 @@ public class MenuPrincipale {
 
 			case 1:
 				GestioneAuto.stampaListaAuto(false);
+
 				gestioneNoleggio(GestioneAuto.autoList, scanner); 
 				break;
 			case 2:
@@ -122,7 +120,6 @@ public class MenuPrincipale {
 				break;
 
 			
-
 			default:
 				System.out.println("Arrivederci!");
 				return;
@@ -132,65 +129,66 @@ public class MenuPrincipale {
 		scanner.close();
 	}
 
-	
+
+
 	public static void menuAdmin() {
 
 		Scanner scanner = new Scanner(System.in);
 		GestioneAuto gestioneAuto = new GestioneAuto("auto.txt");
 		Float prezzo = (float) 0;
 		String modello = "";
-		
+
 		boolean prenotata = false;
 		LocalDate data = null;
 		LocalDate durata = null;
-		
+
 		boolean ripeti = true;
-		
+
 		System.out.println("======================================");
-        System.out.println("          Menu Gestione Auto:         ");
-        System.out.println("======================================");
+		System.out.println("          Menu Gestione Auto:         ");
+		System.out.println("======================================");
 
 		while (ripeti) {
-	        System.out.println("======================================");
-	        System.out.println("         SCEGLI UN'OPERAZIONE         ");
-	        System.out.println("======================================");
-	        System.out.println("1. Stampare lista auto disponibili");
-	        System.out.println("2. Aggiungi nuova auto");
-	        System.out.println("3. Rimuovere un'auto dalla lista");
-	        System.out.println("4. Torna al menù iniziale");
-	        System.out.println("_______________________________________");
-	        System.out.println("0. Esci dall'applicazione");
+			System.out.println("======================================");
+			System.out.println("         SCEGLI UN'OPERAZIONE         ");
+			System.out.println("======================================");
+			System.out.println("1. Stampare lista auto disponibili");
+			System.out.println("2. Aggiungi nuova auto");
+			System.out.println("3. Rimuovere un'auto dalla lista");
+			System.out.println("4. Torna al menù iniziale");
+			System.out.println("_______________________________________");
+			System.out.println("0. Esci dall'applicazione");
 
-	        int scelta = scanner.nextInt();
+			int scelta = scanner.nextInt();
 
-	        switch (scelta) {
-	            case 1:
-	            	GestioneAuto.stampaListaAuto(false);
-	                break;
-	            case 2:
-	            	GestioneAuto.aggiungiAuto();
-	                break;
-	            case 3:
-	                GestioneAuto.rimuoviAuto();
-	                break;
-	            case 4:
-	                menuAccessoUtente();
-	                break;
+			switch (scelta) {
+			case 1:
+				GestioneAuto.stampaListaAuto(false);
+				break;
+			case 2:
+				GestioneAuto.aggiungiAuto();
+				break;
+			case 3:
+				GestioneAuto.rimuoviAuto();
+				break;
+			case 4:
+				menuAccessoUtente();
+				break;
 
-	            case 0:
-	                System.out.println("Grazie e arrivederci !");
-	                ripeti = false;
-	                break;
-	            default:
-	                System.out.println("Scelta non valida. Riprova.");
-	                break;
-	        }
-	    }
+			case 0:
+				System.out.println("Grazie e arrivederci !");
+				break;
+			default:
+				System.out.println("Scelta non valida. Riprova.");
+				break;
+			}
+		}
 
-	    scanner.close();
+		scanner.close();
 	}
-	
+
 	public static void menuBatman() {
+
 	    Scanner scanner = new Scanner(System.in);
 	    GestioneAuto gestioneAuto = new GestioneAuto("auto.txt");
 	    Float prezzo = (float) 0;
@@ -314,7 +312,6 @@ public class MenuPrincipale {
 		}
 	}
 
+	
 
 }
-
-

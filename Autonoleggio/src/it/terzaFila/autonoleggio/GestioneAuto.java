@@ -178,6 +178,7 @@ public class GestioneAuto {
 
 	}
 
+
 	static void salvaAutoSuFile() {
 		try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
 			for (Auto auto : autoList) {
@@ -186,6 +187,7 @@ public class GestioneAuto {
 							+ auto.getPrezzo() + "," + auto.isPrenotata() + "," + auto.dateToString(auto.getData()) + "," + auto.getDurata() + "," + auto.isBatmobile());
 				} else {
 					writer.println(auto.getIdAuto() + "," + auto.getMarchio() + "," + auto.getModello() + ","
+
 							+ auto.getPrezzo() + "," + auto.isPrenotata() + "," + auto.dateToString(auto.getData()) + "," + auto.getDurata());
 				}
 			}
@@ -220,6 +222,7 @@ public class GestioneAuto {
 
 		for (Auto auto : this.autoList) {
 
+
 			if ((auto.getMarchio().equalsIgnoreCase(model)) || (auto.getModello().equalsIgnoreCase(model)) && (!auto.isBatmobile()) ) {
 
 				research.add(auto);
@@ -227,6 +230,7 @@ public class GestioneAuto {
 
 		}
 		return research;
+
 		
 
 	}
@@ -246,29 +250,21 @@ public class GestioneAuto {
 		
 		
 		boolean disp = true;
-		
-		
-		if( (autoEnd.isAfter(pStart) && autoStart.isBefore(pStart))   )
-			return false;
-		
-		
-		if( (pEnd.isAfter(autoStart) && pStart.isBefore(autoStart))   )
-			return false;
-		
-		
-		if( (pEnd.isBefore(autoEnd) && pStart.isAfter(autoEnd))   )
-			return false;
-			
-		
-		if( (autoStart.isBefore(pEnd) && autoEnd.isAfter(pEnd))  )
-			return false;	
-		
-		
-		return disp;	
-		 
-	
-	
-	}
 
+		if ((autoEnd.isAfter(pStart) && autoStart.isBefore(pStart)))
+			return false;
+
+		if ((pEnd.isAfter(autoStart) && pStart.isBefore(autoStart)))
+			return false;
+
+		if ((pEnd.isBefore(autoEnd) && pStart.isAfter(autoEnd)))
+			return false;
+
+		if ((autoStart.isBefore(pEnd) && autoEnd.isAfter(pEnd)))
+			return false;
+
+		return disp;
+
+	}
 
 }

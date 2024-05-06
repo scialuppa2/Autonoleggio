@@ -40,6 +40,7 @@ public class RegistrazioneCliente {
 
         System.out.print("Password: ");
         String password = scanner.nextLine();
+        String hashedPassword = PasswordHashing.hashPassword(password);
         while (!InputValidator.validaPassword(password)) {
             System.out.println("La password non è valida. Inserisci una password valida (almeno 8 caratteri):");
             password = scanner.nextLine();
@@ -48,7 +49,7 @@ public class RegistrazioneCliente {
      // Scrivi i dati completi del cliente su un file di testo separato
         try {
             PrintWriter clientiWriter = new PrintWriter(new FileWriter("utenti.txt", true));
-            clientiWriter.println(nome + "," + cognome + "," + email + "," + password + "," + "user");
+            clientiWriter.println(nome + "," + cognome + "," + email + "," + hashedPassword + "," + "user");
             clientiWriter.println(); // Aggiungi una riga vuota per separare i dati
             clientiWriter.close();
             System.out.println("Registrazione completata! I tuoi dati sono stati salvati.");
