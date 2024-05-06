@@ -15,7 +15,7 @@ import it.terzaFila.autonoleggio.entity.Auto;
 
 public class GestioneAuto {
 	private static String FILE_PATH = "auto.txt";
-	private static List<Auto> autoList;
+	public static List<Auto> autoList;
 
 	public GestioneAuto(String FILE_PATH) {
 		//this.FILE_PATH = FILE_PATH;
@@ -224,18 +224,17 @@ public class GestioneAuto {
 	
 	public static boolean isDisponible(Auto current, LocalDate pStart, int durata) {
 		
-		System.out.println("current auto" + current.getData().toString());
+		
 		
 		LocalDate pEnd = pStart.plusDays(durata);
-		System.out.println("pStart " + pStart.toString());
-		System.out.println("pEnd " + pEnd.toString());
+		
 		
 		LocalDate autoStart = current.getData();
 		
 		
-		LocalDate autoEnd = autoStart.plusDays(current.getDurata());
+		LocalDate autoEnd = autoStart.plusDays(  current.getDurata());
 		
-		System.out.println("autoEnd" + autoEnd.toString());
+		
 		
 		boolean disp = true;
 		

@@ -1,9 +1,9 @@
-1,Toyota,Corolla,25.0,false,N/D,0,false
-2,Ford,Focus,22.0,false,N/D,0,false
-3,BMW,Serie3,35.0,false,N/D,0,false
-4,Audi,A4,32.0,false,N/D,0,false
-5,Mercedes-Benz,ClasseC,38.0,false,N/D,0,false
-6,Fiat,Panda,22.0,false,6/5/2024,10,false
+1,Toyota,Corolla,25.0,false,N/D,0
+2,Ford,Focus,22.0,false,N/D,0
+3,BMW,Serie3,35.0,false,N/D,0
+4,Audi,A4,32.0,false,N/D,0
+5,Mercedes-Benz,ClasseC,38.0,false,N/D,0
+6,Fiat,Panda,22.0,true,6/5/2024,10
 99,Batmarchio,Batmodello,99.0,false,N/D,0,true
 98,Batmarchio2,Batmodello2,98.0,false,N/D,0,true
 7,Ferrari,F2024,100.0,false,N/D,0

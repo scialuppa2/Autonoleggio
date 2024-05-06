@@ -99,6 +99,7 @@ public class MenuPrincipale {
 
 			case 1:
 				GestioneAuto.stampaListaAuto(false);
+				gestioneNoleggio(GestioneAuto.autoList, scanner); 
 				break;
 			case 2:
 				System.out.println("Inserisci Prezzo:");
@@ -120,9 +121,7 @@ public class MenuPrincipale {
 				gestioneNoleggio(autoPerModello, scanner); // Corretto il passaggio dei risultati della ricerca
 				break;
 
-			case 4:
-				menuAccessoUtente();
-				break;
+			
 
 			default:
 				System.out.println("Arrivederci!");
@@ -292,8 +291,10 @@ public class MenuPrincipale {
 			}
 
 			for (Auto auto : risultatiRicerca) {
+				System.out.println(GestioneAuto.isDisponible(auto, dataInizio, dataFine));
 				if (auto.getIdAuto() == idAuto) {
-					if (!auto.isPrenotata()) {
+					if (!GestioneAuto.isDisponible(auto, dataInizio, dataFine)) {
+						
 						// Segna l'auto come prenotata e salva le modifiche
 						auto.setPrenotata(true);
 						
