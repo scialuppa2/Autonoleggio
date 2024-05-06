@@ -291,7 +291,7 @@ public class MenuPrincipale {
 				
 				
 				if (auto.getIdAuto() == idAuto) {
-					if ( true) { /*!GestioneAuto.isDisponible(auto, dataInizio, dataFine*/ 
+					if ( !auto.isPrenotata()) { /*!GestioneAuto.isDisponible(auto, dataInizio, dataFine*/ 
 						
 						// Segna l'auto come prenotata e salva le modifiche
 						auto.setPrenotata(true);
