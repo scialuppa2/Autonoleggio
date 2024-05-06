@@ -26,7 +26,7 @@ public class Auto {
     private boolean isBatmobile = false;
     private boolean prenotata = false;
     private LocalDate data = null;
-    private LocalDate durata = null;
+    private int durata = 0;
 
  // Costruttore senza il parametro isBatmobile
     public Auto(int idAuto, String marchio, String modello, float prezzo) {
@@ -95,19 +95,21 @@ public class Auto {
 		return data;
 	}
 
-	public void setData(LocalDate data) {
-		this.data = data;
+	public void setData(LocalDate dataInizio) {
+		this.data = dataInizio;
 	}
 
-	public LocalDate getDurata() {
+	public int getDurata() {
 		return durata;
 	}
 
-	public void setDurata(LocalDate durata) {
-		this.durata = durata;
+	public void setDurata(int dataFine) {
+		
+		this.durata = dataFine;
+		
 	}
 
-	public String dateToString(LocalDate data) {
+	public static String dateToString(LocalDate data) {
 		if (data != null) {
 			return data.getDayOfMonth() + "/" + data.getMonthValue() + "/" + data.getYear();
 		} else {
@@ -115,8 +117,11 @@ public class Auto {
 		}
 	}
 
-	public LocalDate stringToDate(String data) {
-
+	public static LocalDate stringToDate(String data) {
+		
+		if(data.equalsIgnoreCase("N/D"))
+			return null;
+		
 		Integer dd = Integer.valueOf(data.split("/")[0]);
 		Integer mm = Integer.valueOf(data.split("/")[1]);
 		Integer yyyy = Integer.valueOf(data.split("/")[2]);
@@ -127,7 +132,7 @@ public class Auto {
 
 	public String toString() {
 	    String prenotataStringa = (prenotata) ? "Non Disponibile" : "Disponibile";
-	    String durataStringa = (durata != null) ? String.valueOf(durata.getDayOfYear()) : "N/D";
+	    String durataStringa = (durata != 0) ? String.valueOf(durata) : "N/D";
 	    return this.idAuto + ", " + this.marchio + ", " + this.modello + ", " + this.prezzo + ", " + prenotataStringa + ", " + this.dateToString(this.data) + ", " + durataStringa;
 	}
 

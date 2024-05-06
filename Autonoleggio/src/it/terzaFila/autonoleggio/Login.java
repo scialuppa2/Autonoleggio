@@ -33,8 +33,10 @@ public class Login {
 			if (passwordStored.equals(hashedPassword)) {
 				System.out.println("Accesso riuscito!");
 				boolean isBatman = ruolo.equals("batman"); // Determina se l'utente è Batman
+				
 				// Verifica il ruolo e indirizza l'utente al menu appropriato
 				if (ruolo.equals("user")) {
+					
 					// Utente normale
 					// Esegui le azioni necessarie per il menu dell'utente
 					MenuPrincipale.menuCliente();

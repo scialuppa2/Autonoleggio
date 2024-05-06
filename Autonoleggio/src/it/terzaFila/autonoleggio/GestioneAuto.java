@@ -15,43 +15,57 @@ import it.terzaFila.autonoleggio.entity.Auto;
 
 public class GestioneAuto {
 	private static String FILE_PATH = "auto.txt";
-	private static List<Auto> autoList;
+	public static List<Auto> autoList;
 
 	public GestioneAuto(String FILE_PATH) {
-		this.FILE_PATH = FILE_PATH;
+		//this.FILE_PATH = FILE_PATH;
 		this.autoList = new ArrayList<>();
+		
 		leggiAutoDaFile();
 	}
 
 	private void leggiAutoDaFile() {
+		
 		try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
 				String[] parts = line.split(",");
-				if (parts.length >= 5) { // Assicurati che ci siano almeno 5 elementi nella riga
+				if (parts.length >= 7) { // Assicurati che ci siano almeno 5 elementi nella riga
 					int idAuto = Integer.parseInt(parts[0].trim());
 					String marchio = parts[1].trim();
 					String modello = parts[2].trim();
 					float prezzo = Float.parseFloat(parts[3].trim());
 					boolean prenotata = Boolean.parseBoolean(parts[4].trim());
+					
+					LocalDate date = Auto.stringToDate(parts[5].trim()) ;
+					int durata = Integer.parseInt (parts[6].trim());
+					
 					boolean isBatmobile = false; // Impostazione predefinita per isBatmobile
 
-					if (parts.length >= 6) { // Verifica se c'è un sesto elemento
-						isBatmobile = Boolean.parseBoolean(parts[5].trim()); // Leggi il valore booleano isBatmobile
+					if (parts.length >= 8) { // Verifica se c'è un sesto elemento
+						isBatmobile = Boolean.parseBoolean(parts[7].trim()); // Leggi il valore booleano isBatmobile
 					}
 
 					Auto auto = new Auto(idAuto, marchio, modello, prezzo);
+					
 					auto.setPrenotata(prenotata);
 					auto.setIsBatmobile(isBatmobile); // Imposta isBatmobile
+					
+					auto.setDurata(durata);
+					auto.setData(date);
+					
 					autoList.add(auto);
 				} else {
 					System.out.println("La riga non contiene abbastanza elementi: " + line);
 				}
 			}
 		} catch (IOException e) {
+			
 			System.out.println("Si è verificato un errore durante la lettura del file: " + e.getMessage());
 		}
+		
 	}
+
 
 	public static void stampaListaAuto(boolean isBatman) {
 		System.out.println("==============================================");
@@ -164,16 +178,17 @@ public class GestioneAuto {
 
 	}
 
-	public static void salvaAutoSuFile() {
+
+	static void salvaAutoSuFile() {
 		try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
 			for (Auto auto : autoList) {
 				if (auto.isBatmobile()) {
 					writer.println(auto.getIdAuto() + "," + auto.getMarchio() + "," + auto.getModello() + ","
-							+ auto.getPrezzo() + "," + auto.isPrenotata() + "," + auto.isBatmobile());
+							+ auto.getPrezzo() + "," + auto.isPrenotata() + "," + auto.dateToString(auto.getData()) + "," + auto.getDurata() + "," + auto.isBatmobile());
 				} else {
 					writer.println(auto.getIdAuto() + "," + auto.getMarchio() + "," + auto.getModello() + ","
-	                        + auto.getPrezzo() + "," + auto.isPrenotata()
-	                        + "," + auto.getData() + "," + auto.getDurata());
+
+							+ auto.getPrezzo() + "," + auto.isPrenotata() + "," + auto.dateToString(auto.getData()) + "," + auto.getDurata());
 				}
 			}
 		} catch (IOException e) {
@@ -185,10 +200,13 @@ public class GestioneAuto {
 	public List<Auto> findPrice(float prezzo) {
 
 		List<Auto> research = new ArrayList<Auto>();
-
+		
 		for (Auto auto : this.autoList) {
-
-			if ((auto.getPrezzo() <= prezzo) && (!auto.isBatmobile()) && (!auto.isPrenotata())) {
+			System.out.println(auto.getMarchio());
+			if ((auto.getPrezzo() <= prezzo) /* && (!auto.isBatmobile()) && (!auto.isPrenotata() )*/) {
+				
+				
+				
 				research.add(auto);
 			}
 
@@ -204,29 +222,33 @@ public class GestioneAuto {
 
 		for (Auto auto : this.autoList) {
 
-			if ((auto.getMarchio().equals(model)) 
-					|| (auto.getModello().equals(model)) && (!auto.isBatmobile()) && (!auto.isPrenotata())) {
+
+			if ((auto.getMarchio().equalsIgnoreCase(model)) || (auto.getModello().equalsIgnoreCase(model)) && (!auto.isBatmobile()) ) {
+
 				research.add(auto);
 			}
 
 		}
 		return research;
+
+		
+
 	}
-
+	
 	public static boolean isDisponible(Auto current, LocalDate pStart, int durata) {
-
-		System.out.println("current auto" + current.getData().toString());
-
+		
+		
+		
 		LocalDate pEnd = pStart.plusDays(durata);
-		System.out.println("pStart " + pStart.toString());
-		System.out.println("pEnd " + pEnd.toString());
-
+		
+		
 		LocalDate autoStart = current.getData();
-
-		LocalDate autoEnd = autoStart.plusDays(current.getDurata());
-
-		System.out.println("autoEnd" + autoEnd.toString());
-
+		
+		
+		LocalDate autoEnd = autoStart.plusDays(  current.getDurata());
+		
+		
+		
 		boolean disp = true;
 
 		if ((autoEnd.isAfter(pStart) && autoStart.isBefore(pStart)))

@@ -1,41 +1,35 @@
-```mermaid
-graph TD
-A[Inizio] -- Link text --> B{ login/registration}
 
-B --login --> C{Login}
-C -- corretto --> F[menu clienti]
-C -- errato --> B
-B -- register --> D[register]
-D --> G[Inserimento Dati]
-G --> F
-C -- Manager --> H[menu Manager]
 
-H -- inserisci auto --> HA[modello,prezzo]
-H -- elimina auto --> HB[modello]
-H -- salva auto --> HC[salva su file]
-H -- carica auto --> HD[carica su file]
+## Autonoleggio TerzaFila
 
-F --> I[cerca per prezzo]
-F --> LL[cerca per modello]
-```
+Il progetto consente la gestione di un autonoleggio, partendo da un menù inziale si può accedere direttamente, registrarsi o uscire dall'applicazione.
 
-## Autonoleggio
+MENU
+Scegli un'opzione    
+1. Accedi
+2. Registrati
+0. Esci
 
-Siete una software house e venite incaricati di sviluppare un autonoleggio. questo autonoleggio presenta due attori: 
-- il manager che può inserire auto 
-e rimuoverle (e anche effettuare ricerche)
-- il cliente: il cliente può noleggiare un'auto 
-(quindi ci sarà uno stato noleggiata a true o false), 
-effettuare una ricerca per prezzo o per nome auto. 
-una volta che un'auto è noleggiata fino a quando non si restituisce
-non può essere noleggiata da qualcun altro.
+- Opzione 1: si accede con email e password, ed a seconda dell'utente che ha effettuato il login si accederà ad un menù.
+- Opzione 2: si ha la possibilità di registrarsi come Cliente, inserendo tutte le informazioni che vengono richieste.
 
-**Twist**: in realtà questo autonoleggio 
-è una base segreta di batman e inserendo il suo nome 
-e una password compare la batmobile che non è visibile a nessun altro. Batman può aggiungere o rimuovere nuove batmobili.
 
-ultimissima cosa cercate di gestire anche un login generale e un sistema di registrazione
+*Se si effettua il login da Manager o Batman si avrà il seguente menù:
 
-il 6 come consegna voglio il link e il jar file dell'eseguibile
+MENU GESTIONE AUTO
+1. Stampa lista auto disponibili
+2. Aggiungi nuova auto
+3. Rimuovi un'auto dalla lista
+4. Torna al menù iniziale
+0. Esci dall'applicazione
 
-La ricerca per prezzo deve restituire le auto con quel prezzo o inferirore
+*Se si effettua il login da Cliente si avrà il menu di ricerca/noleggio auto:
+
+RICERCA L'AUTO DA NOLEGGIARE 
+1. Stampa lista auto
+2. Cerca auto per prezzo
+3. Cerca auto per modello
+0. Esci
+
+
+
