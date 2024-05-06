@@ -75,7 +75,8 @@ public class GestioneAuto {
 		for (Auto auto : autoList) {
 			// Se l'utente non è Batman e l'auto è una Batmobile, passa alla prossima
 			// iterazione del ciclo
-			if (!isBatman && auto.isBatmobile()) {
+			
+			if (!isBatman && auto.isBatmobile() || auto.getData() != null ) {
 				continue;
 			}
 			System.out.println(auto);
@@ -236,7 +237,6 @@ public class GestioneAuto {
 	}
 	
 	public static boolean isDisponible(Auto current, LocalDate pStart, int durata) {
-		
 		
 		
 		LocalDate pEnd = pStart.plusDays(durata);
