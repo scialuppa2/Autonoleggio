@@ -1,4 +1,4 @@
-![BatMan](https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/1489b916166391.562a646dc8806.png)
+
 
 ## Autonoleggio TerzaFila
 
