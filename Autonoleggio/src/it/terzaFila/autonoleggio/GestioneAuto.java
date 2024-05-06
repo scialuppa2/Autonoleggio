@@ -24,6 +24,7 @@ public class GestioneAuto {
 	}
 
 	private void leggiAutoDaFile() {
+		
 		try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
@@ -49,9 +50,12 @@ public class GestioneAuto {
 				}
 			}
 		} catch (IOException e) {
+			
 			System.out.println("Si è verificato un errore durante la lettura del file: " + e.getMessage());
 		}
+		
 	}
+
 
 	public static void stampaListaAuto(boolean isBatman) {
 		System.out.println("==============================================");
@@ -184,10 +188,13 @@ public class GestioneAuto {
 	private List<Auto> findPrice(float prezzo) {
 
 		List<Auto> research = new ArrayList<Auto>();
-
+		
 		for (Auto auto : this.autoList) {
-
-			if ((auto.getPrezzo() <= prezzo) && (!auto.isBatmobile()) && (!auto.isPrenotata())) {
+			System.out.println(auto.getMarchio());
+			if ((auto.getPrezzo() <= prezzo) /* && (!auto.isBatmobile()) && (!auto.isPrenotata() )*/) {
+				
+				
+				
 				research.add(auto);
 			}
 
@@ -203,12 +210,13 @@ public class GestioneAuto {
 
 		for (Auto auto : this.autoList) {
 
-			if ((auto.getMarchio().equals(model))
-					|| (auto.getModello().equals(model)) && (!auto.isBatmobile()) && (!auto.isPrenotata())) {
+			if ((auto.getMarchio().equals(model)) || (auto.getModello().equals(model)) && (!auto.isBatmobile()) && (!auto.isPrenotata())) {
 				research.add(auto);
 			}
 
 		}
+		 return research;
+	}
 	
 	public static boolean isDisponible(Auto current, LocalDate pStart, int durata) {
 		
