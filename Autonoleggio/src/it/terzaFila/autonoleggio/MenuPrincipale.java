@@ -39,7 +39,7 @@ public class MenuPrincipale {
 			System.out.println("0. Esci");
 
 
-			int scelta = scanner.nextInt();
+			int scelta = scanner.nextInt(); // se inserisci stringa da errore non gestito
 
 			switch (scelta) {
           
