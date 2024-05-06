@@ -1,6 +1,7 @@
 ## Autonoleggio TerzaFila
 
-Il progetto consente la gestione di un autonoleggio, partendo da un menù inziale si può accedere direttamente, registrarsi o uscire dall'applicazione .
+Il progetto consente la gestione di un autonoleggio, partendo da un menù inziale si può accedere direttamente, registrarsi o uscire dall'applicazione.
+
 MENU:
 Scegli un'opzione:    
 1. Accedi
