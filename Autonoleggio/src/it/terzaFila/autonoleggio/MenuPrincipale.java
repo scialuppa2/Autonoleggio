@@ -290,17 +290,22 @@ public class MenuPrincipale {
 			for (Auto auto : risultatiRicerca) {
 
 				if (auto.getIdAuto() == idAuto) {
-					if (!auto.isPrenotata()) { /* !GestioneAuto.isDisponible(auto, dataInizio, dataFine */
 
-						// Segna l'auto come prenotata e salva le modifiche
-						auto.setPrenotata(true);
+					if ( auto.getData()!=null) { /*!GestioneAuto.isDisponible(auto, dataInizio, dataFine*/ 
+						
+						if(GestioneAuto.isDisponible(auto, dataInizio, dataFine)) {
+							// Segna l'auto come prenotata e salva le modifiche
+							auto.setPrenotata(true);
+							
+							auto.setData(dataInizio); // Imposta la data di inizio noleggio
+							auto.setDurata(dataFine); // Imposta la data di fine noleggio
+							System.out.println("Auto noleggiata con successo!");
+	
+							// Salva le modifiche nel file auto.txt
 
-						auto.setData(dataInizio); // Imposta la data di inizio noleggio
-						auto.setDurata(dataFine); // Imposta la data di fine noleggio
-						System.out.println("Auto noleggiata con successo!");
-
-						// Salva le modifiche nel file auto.txt
-						GestioneAuto.salvaAutoSuFile();
+              GestioneAuto.salvaAutoSuFile();
+						}else
+							System.out.println("Questa auto è già stata noleggiata.");
 
 						return;
 					} else {
