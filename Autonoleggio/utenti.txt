@@ -1,10 +1,11 @@
 
+Roberta,Rezzonico,roberta.rez@gmail.com,285f2d30914b9e9d96b221c883dd0cd2e26abbe69e1f3f9aefd353a152de7dda,user
+
+Bruce,Wayne,brucewayne@gotham.com,aeb856192839fd3a2e50a5a146c4bd73d73210a0d314ec47368a99dbf165c289,admin
+
+Batman,Supereroe,batman@pipistrello.com,69a212bafda2b68264af3a3ce8f1c7c0f44c76caa281f11f1ed71ff934d97d28,batman
+
+Fabrizio,D'alessandro,scialuppa2@gmail.com,ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f,user
 
 
-
-Bruce,Wayne,brucewayne@gotham.com,sonobruce,admin
-
-Batman,Supereroe,batman@pipistrello.com,sonobatman,batman
-
-Fabrizio,D'alessandro,scialuppa2@gmail.com,12345678,user
 

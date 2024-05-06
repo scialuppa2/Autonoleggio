@@ -95,19 +95,21 @@ public class Auto {
 		return data;
 	}
 
-	public void setData(String data) {
-		this.data = this.stringToDate(data);
+	public void setData(LocalDate dataInizio) {
+		this.data = dataInizio;
 	}
 
 	public int getDurata() {
 		return durata;
 	}
 
-	public void setDurata(int durata) {
-		this.durata = durata;
+	public void setDurata(int dataFine) {
+		
+		this.durata = dataFine;
+		
 	}
 
-	public String dateToString(LocalDate data) {
+	public static String dateToString(LocalDate data) {
 		if (data != null) {
 			return data.getDayOfMonth() + "/" + data.getMonthValue() + "/" + data.getYear();
 		} else {
@@ -115,8 +117,11 @@ public class Auto {
 		}
 	}
 
-	public LocalDate stringToDate(String data) {
-
+	public static LocalDate stringToDate(String data) {
+		
+		if(data.equalsIgnoreCase("N/D"))
+			return null;
+		
 		Integer dd = Integer.valueOf(data.split("/")[0]);
 		Integer mm = Integer.valueOf(data.split("/")[1]);
 		Integer yyyy = Integer.valueOf(data.split("/")[2]);
