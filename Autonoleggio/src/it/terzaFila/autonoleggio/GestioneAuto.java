@@ -1,3 +1,4 @@
+
 package it.terzaFila.autonoleggio;
 
 import java.io.BufferedReader;
@@ -5,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -202,14 +204,45 @@ public class GestioneAuto {
 
 		for (Auto auto : this.autoList) {
 
-			if ((auto.getMarchio().equals(model))
+			if ((auto.getMarchio().equals(model)) 
 					|| (auto.getModello().equals(model)) && (!auto.isBatmobile()) && (!auto.isPrenotata())) {
 				research.add(auto);
 			}
 
 		}
-
 		return research;
+	}
+
+	public static boolean isDisponible(Auto current, LocalDate pStart, int durata) {
+
+		System.out.println("current auto" + current.getData().toString());
+
+		LocalDate pEnd = pStart.plusDays(durata);
+		System.out.println("pStart " + pStart.toString());
+		System.out.println("pEnd " + pEnd.toString());
+
+		LocalDate autoStart = current.getData();
+
+		LocalDate autoEnd = autoStart.plusDays(current.getDurata());
+
+		System.out.println("autoEnd" + autoEnd.toString());
+
+		boolean disp = true;
+
+		if ((autoEnd.isAfter(pStart) && autoStart.isBefore(pStart)))
+			return false;
+
+		if ((pEnd.isAfter(autoStart) && pStart.isBefore(autoStart)))
+			return false;
+
+		if ((pEnd.isBefore(autoEnd) && pStart.isAfter(autoEnd)))
+			return false;
+
+		if ((autoStart.isBefore(pEnd) && autoEnd.isAfter(pEnd)))
+			return false;
+
+		return disp;
 
 	}
+
 }
