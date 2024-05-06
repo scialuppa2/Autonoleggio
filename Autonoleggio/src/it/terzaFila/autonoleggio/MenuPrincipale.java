@@ -36,7 +36,8 @@ public class MenuPrincipale {
 			System.out.println("_____________________________");
 			System.out.println("0. Esci");
 
-			int scelta = scanner.nextInt();
+
+			int scelta = scanner.nextInt(); // se inserisci stringa da errore non gestito
 
 			switch (scelta) {
 
@@ -70,8 +71,9 @@ public class MenuPrincipale {
 		Float prezzo = (float) 0;
 		String modello = "";
 		// Creare un'istanza di GestioneAuto
+		
 		GestioneAuto gestioneAuto = new GestioneAuto("auto.txt");
-
+		
 		boolean ripeti = true;
 		System.out.println("========================================");
 		System.out.println("      RICERCA L'AUTO DA NOLEGGIARE      ");
@@ -94,14 +96,18 @@ public class MenuPrincipale {
 
 			case 1:
 				GestioneAuto.stampaListaAuto(false);
+
+				gestioneNoleggio(GestioneAuto.autoList, scanner); 
 				break;
 			case 2:
 				System.out.println("Inserisci Prezzo:");
 				prezzo = scanner.nextFloat();
 				scanner.nextLine();
+				
 				List<Auto> autoPerPrezzo = gestioneAuto.findPrice(prezzo);
 				stampaRicercaAuto(autoPerPrezzo);
 				gestioneNoleggio(autoPerPrezzo, scanner); // Corretto il passaggio dei risultati della ricerca
+				
 				break;
 
 			case 3:
@@ -113,10 +119,7 @@ public class MenuPrincipale {
 				gestioneNoleggio(autoPerModello, scanner); // Corretto il passaggio dei risultati della ricerca
 				break;
 
-			case 4:
-				menuAccessoUtente();
-				break;
-
+			
 			default:
 				System.out.println("Arrivederci!");
 				return;
@@ -126,56 +129,7 @@ public class MenuPrincipale {
 		scanner.close();
 	}
 
-	private static void stampaRicercaAuto(List<Auto> autoList) {
-		System.out.println("\n Risultati della ricerca: \n");
-		if (autoList.isEmpty()) {
-			System.out.println("Nessun risultato trovato.");
-		} else {
-			for (Auto auto : autoList) {
-				System.out.println(auto);
-			}
-		}
-	}
 
-	private static void gestioneNoleggio(List<Auto> risultatiRicerca, Scanner scanner) {
-		System.out.println("_________________________________");
-		System.out.println("Desideri noleggiare un'auto? (S/N)");
-		String risposta = scanner.next();
-		if (risposta.equalsIgnoreCase("S")) {
-			System.out.println("Inserisci l'ID dell'auto da noleggiare:");
-			int idAuto = scanner.nextInt();
-
-			// Consuma il carattere di nuova riga rimanente nel buffer
-			scanner.nextLine();
-
-			// Ottenere le date di inizio e fine noleggio dall'utente
-			System.out.println("Inserisci la data di inizio noleggio (YYYY-MM-DD):");
-			LocalDate dataInizio = LocalDate.parse(scanner.nextLine());
-			System.out.println("Inserisci la data di fine noleggio (YYYY-MM-DD):");
-			LocalDate dataFine = LocalDate.parse(scanner.nextLine());
-
-			for (Auto auto : risultatiRicerca) {
-				if (auto.getIdAuto() == idAuto) {
-					if (!auto.isPrenotata()) {
-						// Segna l'auto come prenotata e salva le modifiche
-						auto.setPrenotata(true);
-						auto.setData(dataInizio); // Imposta la data di inizio noleggio
-						auto.setDurata(dataFine); // Imposta la data di fine noleggio
-						System.out.println("Auto noleggiata con successo!");
-
-						// Salva le modifiche nel file auto.txt
-						GestioneAuto.salvaAutoSuFile();
-
-						return;
-					} else {
-						System.out.println("Questa auto è già stata noleggiata.");
-						return;
-					}
-				}
-			}
-			System.out.println("Nessuna auto trovata con l'ID specificato.");
-		}
-	}
 
 	public static void menuAdmin() {
 
@@ -234,69 +188,130 @@ public class MenuPrincipale {
 	}
 
 	public static void menuBatman() {
-		Scanner scanner = new Scanner(System.in);
-		GestioneAuto gestioneAuto = new GestioneAuto("auto.txt");
-		Float prezzo = (float) 0;
-		String modello = "";
 
-		boolean prenotata = false;
-		LocalDate data = null;
-		LocalDate durata = null;
+	    Scanner scanner = new Scanner(System.in);
+	    GestioneAuto gestioneAuto = new GestioneAuto("auto.txt");
+	    Float prezzo = (float) 0;
+	    String modello = "";
 
-		boolean ripeti = true;
+	    boolean prenotata = false;
+	    LocalDate data = null;
+	    LocalDate durata = null;
 
-		System.out.println("======================================");
-		System.out.println("          BENTORNATO BATMAN:         ");
-		System.out.println("======================================");
-		System.out.println("⠈⠙⠲⢶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣿⡀⠀⠀⠀⠀⠀⠀⠀⡄⠀⠀⡄⠀⠀⠀⠀⠀⠀⠀⣼⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣿⠟⠓⠉\r\n"
-				+ "⠀⠀⠀⠀⠈⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⢀⣧⣶⣦⣇⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠉⠀⠀⠀⠀\r\n"
-				+ "⠀⠀⠀⠀⠀⠀⠀⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣶⣾⣿⣿⣿⣿⣶⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀\r\n"
-				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠛⠛⠛⠛⠛⠛⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠟⠛⠛⠛⠛⠛⠛⠃⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
-		while (ripeti) {
-			System.out.println("========================================");
-			System.out.println("          SCEGLI UN'OPERAZIONE:         ");
-			System.out.println("========================================");
-			System.out.println("1. Stampare lista auto disponibili");
-			System.out.println("2. Aggiungi nuova batmobile");
-			System.out.println("3. Rimuovere una batmobile dalla lista");
-			System.out.println("4. Torna al menù iniziale");
-			System.out.println("________________________________________");
-			System.out.println("0. Esci dall'applicazione");
+	    boolean ripeti = true;
 
-			int scelta = scanner.nextInt();
+	    System.out.println("======================================");
+	    System.out.println("          BENTORNATO BATMAN:         ");
+	    System.out.println("======================================");
+	    System.out.println("⠈⠙⠲⢶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣿⡀⠀⠀⠀⠀⠀⠀⠀⡄⠀⠀⡄⠀⠀⠀⠀⠀⠀⠀⣼⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣿⠟⠓⠉\r\n"
+	    		+ "⠀⠀⠀⠀⠈⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⢀⣧⣶⣦⣇⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠉⠀⠀⠀⠀\r\n"
+	    		+ "⠀⠀⠀⠀⠀⠀⠀⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣶⣾⣿⣿⣿⣿⣶⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀\r\n"
+	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠛⠛⠛⠛⠛⠛⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠟⠛⠛⠛⠛⠛⠛⠃⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+	    while (ripeti) {
+	    	System.out.println("========================================");
+		    System.out.println("          SCEGLI UN'OPERAZIONE:         ");
+		    System.out.println("========================================");
+	        System.out.println("1. Stampare lista auto disponibili");
+	        System.out.println("2. Aggiungi nuova batmobile");
+	        System.out.println("3. Rimuovere una batmobile dalla lista");
+	        System.out.println("4. Torna al menù iniziale");
+	        System.out.println("________________________________________");
+	        System.out.println("0. Esci dall'applicazione");
 
-			switch (scelta) {
-			case 1:
-				GestioneAuto.stampaListaAuto(true);
-				break;
-			case 2:
-				GestioneAuto.aggiungiBatmobile();
-				break;
-			case 3:
-				GestioneAuto.rimuoviAuto();
-				break;
-			case 4:
-				menuAccessoUtente();
-				break;
-			case 0:
-				System.out.println("Grazie e arrivederci !");
-				ripeti = false;
-				break;
-			default:
-				System.out.println("Scelta non valida. Riprova.");
-				break;
+	        int scelta = scanner.nextInt();
+
+	        switch (scelta) {
+	            case 1:
+	                GestioneAuto.stampaListaAuto(true);
+	                break;
+	            case 2:
+	                GestioneAuto.aggiungiBatmobile();
+	                break;
+	            case 3:
+	                GestioneAuto.rimuoviAuto();
+	                break;
+	            case 4:
+	                menuAccessoUtente();
+	                break;
+	            case 0:
+	                System.out.println("Grazie e arrivederci !");
+	                ripeti = false;
+	                break;
+	            default:
+	                System.out.println("Scelta non valida. Riprova.");
+	                break;
+	        }
+	    }
+	}
+	
+	private static void stampaRicercaAuto(List<Auto> autoList) {
+		System.out.println("\n Risultati della ricerca: \n");
+		if (autoList.isEmpty()) {
+			System.out.println("Nessun risultato trovato.");
+		} else {
+			for (Auto auto : autoList) {
+				System.out.println(auto);
 			}
 		}
 	}
+
+	private static void gestioneNoleggio(List<Auto> risultatiRicerca, Scanner scanner) {
+		System.out.println("_________________________________");
+		System.out.println("Desideri noleggiare un'auto? (S/N)");
+		String risposta = scanner.next();
+		if (risposta.equalsIgnoreCase("S")) {
+			System.out.println("Inserisci l'ID dell'auto da noleggiare:");
+			int idAuto = scanner.nextInt();
+
+			// Consuma il carattere di nuova riga rimanente nel buffer
+			scanner.nextLine();
+
+			// Ottenere le date di inizio e fine noleggio dall'utente
+			System.out.println("Inserisci la data di inizio noleggio (DD/MM/YYYY):");
+			
+			LocalDate dataInizio =  Auto.stringToDate(scanner.nextLine());
+			
+			System.out.println("Inserisci la durata del noleggio in giorni");
+			Integer dataFine = Integer.valueOf( scanner.nextInt() ) ;
+			
+
+			for (Auto auto : risultatiRicerca) {
+				
+				
+				if (auto.getIdAuto() == idAuto) {
+					if ( !auto.isPrenotata()) { /*!GestioneAuto.isDisponible(auto, dataInizio, dataFine*/ 
+						
+						// Segna l'auto come prenotata e salva le modifiche
+						auto.setPrenotata(true);
+						
+						auto.setData(dataInizio); // Imposta la data di inizio noleggio
+						auto.setDurata(dataFine); // Imposta la data di fine noleggio
+						System.out.println("Auto noleggiata con successo!");
+
+						// Salva le modifiche nel file auto.txt
+						GestioneAuto.salvaAutoSuFile();
+
+						return;
+					} else {
+						System.out.println("Questa auto è già stata noleggiata.");
+						return;
+					}
+				}
+			}
+			System.out.println("Nessuna auto trovata con l'ID specificato.");
+		}
+	}
+
+	
 
 }
