@@ -21,6 +21,7 @@ public class Login {
 		String email = scanner.nextLine();
 		System.out.println("Inserisci password:");
 		String password = scanner.nextLine();
+		String hashedPassword = PasswordHashing.hashPassword(password);
 
 		// Verifica se l'email è presente nelle credenziali
 		if (credenziali.containsKey(email)) {
@@ -29,7 +30,7 @@ public class Login {
 			String passwordStored = credenzialiUtente[1]; // Password salvata per l'email specificata
 			String ruolo = credenzialiUtente[2]; // Ruolo dell'utente
 
-			if (passwordStored.equals(password)) {
+			if (passwordStored.equals(hashedPassword)) {
 				System.out.println("Accesso riuscito!");
 				boolean isBatman = ruolo.equals("batman"); // Determina se l'utente è Batman
 				// Verifica il ruolo e indirizza l'utente al menu appropriato
