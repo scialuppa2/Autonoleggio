@@ -14,20 +14,20 @@ public class MenuPrincipale {
 
 		boolean loggedIn = false; // ma serve?
 		boolean ripeti = true;
+		System.out.println("\r\n"
+				+ "                _                    _                  _         _______                 ______ _ _       \r\n"
+				+ "     /\\        | |                  | |                (_)       |__   __|               |  ____(_) |      \r\n"
+				+ "    /  \\  _   _| |_ ___  _ __   ___ | | ___  __ _  __ _ _  ___      | | ___ _ __ ______ _| |__   _| | __ _ \r\n"
+				+ "   / /\\ \\| | | | __/ _ \\| '_ \\ / _ \\| |/ _ \\/ _` |/ _` | |/ _ \\     | |/ _ \\ '__|_  / _` |  __| | | |/ _` |\r\n"
+				+ "  / ____ \\ |_| | || (_) | | | | (_) | |  __/ (_| | (_| | | (_) |    | |  __/ |   / / (_| | |    | | | (_| |\r\n"
+				+ " /_/    \\_\\__,_|\\__\\___/|_| |_|\\___/|_|\\___|\\__, |\\__, |_|\\___/     |_|\\___|_|  /___\\__,_|_|    |_|_|\\__,_|\r\n"
+				+ "                                             __/ | __/ |                                                   \r\n"
+				+ "                                            |___/ |___/                                                    \r\n"
+				+ "");
+		System.out.println("       Benvenuto !!!        ");
 
 		while (ripeti) {
 
-			System.out.println("\r\n"
-					+ "                _                    _                  _         _______                 ______ _ _       \r\n"
-					+ "     /\\        | |                  | |                (_)       |__   __|               |  ____(_) |      \r\n"
-					+ "    /  \\  _   _| |_ ___  _ __   ___ | | ___  __ _  __ _ _  ___      | | ___ _ __ ______ _| |__   _| | __ _ \r\n"
-					+ "   / /\\ \\| | | | __/ _ \\| '_ \\ / _ \\| |/ _ \\/ _` |/ _` | |/ _ \\     | |/ _ \\ '__|_  / _` |  __| | | |/ _` |\r\n"
-					+ "  / ____ \\ |_| | || (_) | | | | (_) | |  __/ (_| | (_| | | (_) |    | |  __/ |   / / (_| | |    | | | (_| |\r\n"
-					+ " /_/    \\_\\__,_|\\__\\___/|_| |_|\\___/|_|\\___|\\__, |\\__, |_|\\___/     |_|\\___|_|  /___\\__,_|_|    |_|_|\\__,_|\r\n"
-					+ "                                             __/ | __/ |                                                   \r\n"
-					+ "                                            |___/ |___/                                                    \r\n"
-					+ "");
-			System.out.println("       Benvenuto !!!        ");
 			System.out.println("============================");
 			System.out.println("      Scegli un'opzione:    ");
 			System.out.println("============================");
@@ -35,7 +35,6 @@ public class MenuPrincipale {
 			System.out.println("2. Registrati");
 			System.out.println("_____________________________");
 			System.out.println("0. Esci");
-
 
 			int scelta = scanner.nextInt(); // se inserisci stringa da errore non gestito
 
@@ -55,11 +54,12 @@ public class MenuPrincipale {
 			case 2:
 				RegistrazioneCliente.registraCliente();
 				break;
-
-			default:
+			case 0:
 				System.out.println("Arrivederci!");
-				// System.exit(0);
-				return;
+				System.exit(0);
+			default:
+				System.err.println("Scelta non valida. Riprova!");
+//				return;
 			}
 		}
 
@@ -71,9 +71,9 @@ public class MenuPrincipale {
 		Float prezzo = (float) 0;
 		String modello = "";
 		// Creare un'istanza di GestioneAuto
-		
+
 		GestioneAuto gestioneAuto = new GestioneAuto("auto.txt");
-		
+
 		boolean ripeti = true;
 		System.out.println("========================================");
 		System.out.println("      RICERCA L'AUTO DA NOLEGGIARE      ");
@@ -86,7 +86,6 @@ public class MenuPrincipale {
 			System.out.println("1. Stampa lista auto  ");
 			System.out.println("2. Cerca auto per prezzo ");
 			System.out.println("3. Cerca auto per modello ");
-			System.out.println("4. Torna al menù iniziale ");
 			System.out.println("__________________________");
 			System.out.println("0. Esci");
 
@@ -97,17 +96,17 @@ public class MenuPrincipale {
 			case 1:
 				GestioneAuto.stampaListaAuto(false);
 
-				gestioneNoleggio(GestioneAuto.autoList, scanner); 
+				gestioneNoleggio(GestioneAuto.autoList, scanner);
 				break;
 			case 2:
 				System.out.println("Inserisci Prezzo:");
 				prezzo = scanner.nextFloat();
 				scanner.nextLine();
-				
+
 				List<Auto> autoPerPrezzo = gestioneAuto.findPrice(prezzo);
 				stampaRicercaAuto(autoPerPrezzo);
 				gestioneNoleggio(autoPerPrezzo, scanner); // Corretto il passaggio dei risultati della ricerca
-				
+
 				break;
 
 			case 3:
@@ -118,29 +117,29 @@ public class MenuPrincipale {
 				stampaRicercaAuto(autoPerModello);
 				gestioneNoleggio(autoPerModello, scanner); // Corretto il passaggio dei risultati della ricerca
 				break;
-
-			
-			default:
+			case 0:
 				System.out.println("Arrivederci!");
-				return;
+				System.exit(0);
+
+			default:
+				System.err.println("Scelta non valida. Riprova!");
+//				return;
 			}
 		}
 
 		scanner.close();
 	}
 
-
-
 	public static void menuAdmin() {
 
 		Scanner scanner = new Scanner(System.in);
 		GestioneAuto gestioneAuto = new GestioneAuto("auto.txt");
-		Float prezzo = (float) 0;
+/*		Float prezzo = (float) 0;
 		String modello = "";
 
 		boolean prenotata = false;
 		LocalDate data = null;
-		LocalDate durata = null;
+		LocalDate durata = null;*/
 
 		boolean ripeti = true;
 
@@ -175,12 +174,16 @@ public class MenuPrincipale {
 				menuAccessoUtente();
 				break;
 
-			case 0:
-				System.out.println("Grazie e arrivederci !");
+			case 0:				
+				System.out.println("Arrivederci!");
+				System.exit(0);
+
 				break;
 			default:
-				System.out.println("Scelta non valida. Riprova.");
+				System.err.println("Scelta non valida. Riprova!");
 				break;
+				
+				
 			}
 		}
 
@@ -189,71 +192,71 @@ public class MenuPrincipale {
 
 	public static void menuBatman() {
 
-	    Scanner scanner = new Scanner(System.in);
-	    GestioneAuto gestioneAuto = new GestioneAuto("auto.txt");
-	    Float prezzo = (float) 0;
-	    String modello = "";
+		Scanner scanner = new Scanner(System.in);
+		GestioneAuto gestioneAuto = new GestioneAuto("auto.txt");
+//		Float prezzo = (float) 0;
+//		String modello = "";
+//
+//		boolean prenotata = false;
+//		LocalDate data = null;
+//		LocalDate durata = null;
 
-	    boolean prenotata = false;
-	    LocalDate data = null;
-	    LocalDate durata = null;
+		boolean ripeti = true;
 
-	    boolean ripeti = true;
+		System.out.println("======================================");
+		System.out.println("          BENTORNATO BATMAN:         ");
+		System.out.println("======================================");
+		System.out.println("⠈⠙⠲⢶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣿⡀⠀⠀⠀⠀⠀⠀⠀⡄⠀⠀⡄⠀⠀⠀⠀⠀⠀⠀⣼⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣿⠟⠓⠉\r\n"
+				+ "⠀⠀⠀⠀⠈⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⢀⣧⣶⣦⣇⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠉⠀⠀⠀⠀\r\n"
+				+ "⠀⠀⠀⠀⠀⠀⠀⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣶⣾⣿⣿⣿⣿⣶⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀\r\n"
+				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠛⠛⠛⠛⠛⠛⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠟⠛⠛⠛⠛⠛⠛⠃⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+				+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+		while (ripeti) {
+			System.out.println("========================================");
+			System.out.println("          SCEGLI UN'OPERAZIONE:         ");
+			System.out.println("========================================");
+			System.out.println("1. Stampare lista auto disponibili");
+			System.out.println("2. Aggiungi nuova batmobile");
+			System.out.println("3. Rimuovere una batmobile dalla lista");
+			System.out.println("4. Torna al menù iniziale");
+			System.out.println("________________________________________");
+			System.out.println("0. Esci dall'applicazione");
 
-	    System.out.println("======================================");
-	    System.out.println("          BENTORNATO BATMAN:         ");
-	    System.out.println("======================================");
-	    System.out.println("⠈⠙⠲⢶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣿⡀⠀⠀⠀⠀⠀⠀⠀⡄⠀⠀⡄⠀⠀⠀⠀⠀⠀⠀⣼⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣿⠟⠓⠉\r\n"
-	    		+ "⠀⠀⠀⠀⠈⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⢀⣧⣶⣦⣇⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠉⠀⠀⠀⠀\r\n"
-	    		+ "⠀⠀⠀⠀⠀⠀⠀⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣶⣾⣿⣿⣿⣿⣶⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀\r\n"
-	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠛⠛⠛⠛⠛⠛⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠟⠛⠛⠛⠛⠛⠛⠃⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-	    		+ "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
-	    while (ripeti) {
-	    	System.out.println("========================================");
-		    System.out.println("          SCEGLI UN'OPERAZIONE:         ");
-		    System.out.println("========================================");
-	        System.out.println("1. Stampare lista auto disponibili");
-	        System.out.println("2. Aggiungi nuova batmobile");
-	        System.out.println("3. Rimuovere una batmobile dalla lista");
-	        System.out.println("4. Torna al menù iniziale");
-	        System.out.println("________________________________________");
-	        System.out.println("0. Esci dall'applicazione");
+			int scelta = scanner.nextInt();
 
-	        int scelta = scanner.nextInt();
-
-	        switch (scelta) {
-	            case 1:
-	                GestioneAuto.stampaListaAuto(true);
-	                break;
-	            case 2:
-	                GestioneAuto.aggiungiBatmobile();
-	                break;
-	            case 3:
-	                GestioneAuto.rimuoviAuto();
-	                break;
-	            case 4:
-	                menuAccessoUtente();
-	                break;
-	            case 0:
-	                System.out.println("Grazie e arrivederci !");
-	                ripeti = false;
-	                break;
-	            default:
-	                System.out.println("Scelta non valida. Riprova.");
-	                break;
-	        }
-	    }
+			switch (scelta) {
+			case 1:
+				GestioneAuto.stampaListaAuto(true);
+				break;
+			case 2:
+				GestioneAuto.aggiungiBatmobile();
+				break;
+			case 3:
+				GestioneAuto.rimuoviAuto();
+				break;
+			case 4:
+				menuAccessoUtente();
+				break;
+			case 0:
+				System.out.println("Arrivederci!");
+				System.exit(0);
+//				break;
+			default:
+				System.err.println("Scelta non valida. Riprova!");
+				break;
+			}
+		}
 	}
-	
+
 	private static void stampaRicercaAuto(List<Auto> autoList) {
 		System.out.println("\n Risultati della ricerca: \n");
 		if (autoList.isEmpty()) {
@@ -278,17 +281,16 @@ public class MenuPrincipale {
 
 			// Ottenere le date di inizio e fine noleggio dall'utente
 			System.out.println("Inserisci la data di inizio noleggio (DD/MM/YYYY):");
-			
-			LocalDate dataInizio =  Auto.stringToDate(scanner.nextLine());
-			
+
+			LocalDate dataInizio = Auto.stringToDate(scanner.nextLine());
+
 			System.out.println("Inserisci la durata del noleggio in giorni");
-			Integer dataFine = Integer.valueOf( scanner.nextInt() ) ;
-			
+			Integer dataFine = Integer.valueOf(scanner.nextInt());
 
 			for (Auto auto : risultatiRicerca) {
-				
-				
+
 				if (auto.getIdAuto() == idAuto) {
+
 					if ( auto.getData()!=null) { /*!GestioneAuto.isDisponible(auto, dataInizio, dataFine*/ 
 						
 						if(GestioneAuto.isDisponible(auto, dataInizio, dataFine)) {
@@ -300,7 +302,8 @@ public class MenuPrincipale {
 							System.out.println("Auto noleggiata con successo!");
 	
 							// Salva le modifiche nel file auto.txt
-						GestioneAuto.salvaAutoSuFile();
+
+              GestioneAuto.salvaAutoSuFile();
 						}else
 							System.out.println("Questa auto è già stata noleggiata.");
 
@@ -314,7 +317,5 @@ public class MenuPrincipale {
 			System.out.println("Nessuna auto trovata con l'ID specificato.");
 		}
 	}
-
-	
 
 }

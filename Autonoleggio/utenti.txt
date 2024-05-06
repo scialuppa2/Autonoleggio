@@ -7,5 +7,5 @@ Batman,Supereroe,batman@pipistrello.com,69a212bafda2b68264af3a3ce8f1c7c0f44c76ca
 
 Fabrizio,D'alessandro,scialuppa2@gmail.com,ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f,user
 
-Marco,Rossi,marcorossi@gmail.com,87654321,user
+
 

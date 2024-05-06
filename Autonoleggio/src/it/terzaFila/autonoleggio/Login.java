@@ -60,6 +60,7 @@ public class Login {
 			System.out.println("Email non trovata. Accesso negato.");
 			accesso();
 		}
+		scanner.close();
 
 	}
 
